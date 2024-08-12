@@ -41,15 +41,15 @@ export async function middleware(request) {
         if (request.nextUrl.pathname === "/Api/Logout") {
             console.log("Logging out")
             const response = NextResponse.redirect(new URL('/', request.url))
-            // response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
-            response.cookies.set("Login Token", '', {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                path: '/',
-                domain: '.health-medica.vercel.app',  // Ensure domain is correct 
-                maxAge: 0, 
-                sameSite: 'Lax', 
-            });
+            response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
+            // response.cookies.set("Login Token", '', {
+            //     httpOnly: true,
+            //     secure: process.env.NODE_ENV === 'production',
+            //     path: '/',
+            //     domain: '.health-medica.vercel.app',  // Ensure domain is correct 
+            //     maxAge: 0, 
+            //     sameSite: 'Lax', 
+            // });
             return response
         }
 
