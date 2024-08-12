@@ -1,6 +1,6 @@
 // components/SuccessIcon.js
 import React from 'react';
-import styles from './Success.module.css';
+import styles from './success.module.css';
 
 const SuccessIcon = ({ size = 100 }) => {
   return (

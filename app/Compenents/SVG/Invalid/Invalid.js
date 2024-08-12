@@ -1,6 +1,6 @@
 // components/InvalidIcon.js
 import React from 'react';
-import styles from './Invalid.module.css';
+import styles from './invalid.module.css';
 
 const InvalidIcon = ({ size = 100 }) => {
   return (
