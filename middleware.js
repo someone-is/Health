@@ -43,10 +43,12 @@ export async function middleware(request) {
             const response = NextResponse.redirect(new URL('/', request.url))
             // response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
             response.cookies.set("Login Token", '', {
+                httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 path: '/',
                 domain: process.env.DOMAIN_URL,  
                 maxAge: 0, 
+                sameSite: 'Lax', 
             });
             return response
         }
