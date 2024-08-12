@@ -24,7 +24,7 @@ export async function POST(request) {
                     secure: process.env.NODE_ENV === 'production',
                     path: '/',
                     // maxAge: 10,  // 10sec in seconds
-                    domain: '.health-medica.vercel.app',  // Ensure domain is correct
+                    domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN_URL : undefined,
                     maxAge: 24 * 60 * 60,  // 1 day in seconds
                     sameSite: 'Lax',  // Adjust to 'Strict' or 'None' if necessary
                 });
