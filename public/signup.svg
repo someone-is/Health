@@ -1,0 +1,35 @@
+<svg width="200" height="60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Embedding the Inter font -->
+    <style type="text/css">
+      @font-face {
+        font-family: 'Inter';
+        src: url('data:font/woff2;charset=utf-8;base64,d09GRgABAAAAAAcYABAAAAAACAIAAAAP0AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDHAqDLRRFPUgACwAABNgJkAARACoAFgAUAxgTGRs...') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+      }
+      .inter-font {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+
+    <!-- Define a shadow filter -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Text with white color and shadow effect -->
+  <text x="10" y="40" class="inter-font" font-size="40" fill="black" filter="url(#shadow)">
+    SIGN UP
+  </text>
+</svg>
+

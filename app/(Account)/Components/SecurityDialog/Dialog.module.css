@@ -1,0 +1,207 @@
+.overlay {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    margin-left: -1.5rem;
+    border-radius: var(--border-radius);
+    width: 88vw;
+    height: 100vh;
+    background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.303), rgba(0, 0, 0, 0.466));
+    z-index: 10;
+    animation: backfadeIn 1s forwards;
+}
+
+.overlay.closing {
+    animation: backfadeOut 1s forwards;
+}
+
+@keyframes backfadeIn {
+    0% {
+        backdrop-filter: blur(3px) contrast(1);
+        /* transform: scale(0.9); */
+        /* background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.466),rgba(255, 0, 0, 0.303)); */
+
+    }
+
+    100% {
+        backdrop-filter: blur(10px) contrast(0.8);
+        /* transform: scale(1); */
+        /* background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.303), rgba(0, 0, 0, 0.466)); */
+    }
+
+    /* 0% {
+        background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.303), rgba(0, 0, 0, 0.466));
+    }
+    25% {
+        background: linear-gradient(to bottom right, rgba(0, 255, 0, 0.303), rgba(0, 0, 255, 0.466));
+    }
+    50% {
+        background: linear-gradient(to bottom right, rgba(0, 0, 255, 0.303), rgba(255, 0, 255, 0.466));
+    }
+    75% {
+        background: linear-gradient(to bottom right, rgba(255, 255, 0, 0.303), rgba(0, 255, 255, 0.466));
+    }
+    100% {
+        background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.303), rgba(0, 0, 0, 0.466));
+    } */
+}
+
+@keyframes backfadeOut {
+    0% {
+        backdrop-filter: blur(10px) contrast(0.8);
+    }
+
+    100% {
+        backdrop-filter: blur(3px) contrast(1);
+        opacity: 0;
+    }
+
+}
+
+@keyframes fadeIn {
+    0% {
+        filter: blur(60px);
+        opacity: 0.4;
+        transform: scale(1.2);
+    }
+
+    100% {
+        filter: blur(0);
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        filter: blur(0);
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        filter: blur(60px);
+        opacity: 0.4;
+        transform: scale(1.2);
+    }
+
+}
+
+.dialog {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    flex-direction: column;
+    width: min-content;
+    height: min-content;
+    gap: 4rem;
+    background-color: rgba(0, 0, 0, 0.721);
+    border-radius: var(--border-radius);
+}
+
+.opening{
+    animation: fadeIn 1s forwards;
+}
+
+.dialog.closing {
+    animation: fadeOut 1s forwards;
+}
+
+.inputs {
+    display: grid;
+    gap: 2rem;
+}
+.length4{
+    grid-template-columns: auto auto auto auto;
+}
+.length6{
+    grid-template-columns: auto auto auto auto auto auto;
+}
+
+.inputs input {
+    font-size: x-large;
+    font-family: var(--font-mono);
+    text-align: center;
+    width: 3.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid rgb(45, 45, 45);
+    font-family: var(--font-mono);
+    aspect-ratio: 1/1;
+}
+
+.heading{
+    background-image: linear-gradient(to bottom right, rgb(255, 0, 0), rgb(0, 10, 204));
+    background-clip: text;
+    /* color: rgba(255, 255, 255, 0); */
+    color: rgba(255, 255, 255, 0.468);
+}
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    /* font-weight: 700; */
+    font-family: var(--font-mono);
+    background-color: #ff5454;
+    width: 10rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.invalidpin{
+    animation: 0.5s vibration ease-in-out forwards;
+}
+@keyframes vibration {
+    0%{
+        transform: translateX(5px);
+    }
+    20%{
+        transform: translateX(-5px);
+    }
+    40%{
+        transform: translateX(5px);
+    }
+    60%{
+        transform: translateX(-5px);
+    }
+    80%{
+        transform: translateX(5px);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+.invalidInput input{
+    border: 1px solid red;
+    transition: all 0.5s;
+    animation: 0.5s stabilize ease-in-out forwards;
+}
+@keyframes stabilize {
+    0%{
+        transform: translateX(-5px) rotate(-5deg);
+    }
+    20%{
+        transform: translateX(5px) rotate(5deg);
+    }
+    40%{
+        transform: translateX(-5px) rotate(-5deg);
+    }
+    60%{
+        transform: translateX(5px) rotate(5deg);
+    }
+    80%{
+        transform: translateX(-5px) rotate(-5deg);
+    }
+    100%{
+        transform: translateX(0) rotate(0);
+    }
+}
+@media (prefers-color-scheme: light) {
+    .overlay {
+        background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.303), rgba(255, 255, 255, 0.466));
+    }
+    .dialog {
+        background-color: rgba(255, 255, 255, 0.721);
+    }
+}

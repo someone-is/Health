@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Other
+app/(Account)/Components/Button/Button.js
+app/(Account)/Components/Button/Component.module.css
+app/(Account)/Components/Button/Shinybutton.js
+app/DatabaseAndFetching/Models/SyncData.js

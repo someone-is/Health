@@ -1,0 +1,94 @@
+.tags {
+
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0rem 1rem 0rem;
+    background-color: rgba(var(--callout-rgb), 0.7);
+    border: 1px solid rgba(var(--callout-border-rgb), 0.5);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    /* user-select: none; */
+}
+
+.content {
+    position: relative;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.content.expanded {
+    max-height: 500px;
+    overflow-y: scroll;
+    /* adjust this value as needed */
+}
+
+.content.expanded::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+.content.expanded::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+.content.expanded::-webkit-scrollbar-thumb {
+    visibility: hidden;
+    border-radius: 3px;
+    background: #88888889;
+}
+
+/* Handle on hover */
+.content.expanded::-webkit-scrollbar-thumb:hover {
+    background: #858585;
+}
+
+.content.expanded:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+.content h4 {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.UserDetails {
+    align-items: center;
+    display: grid;
+    padding: 0.5rem 0.8rem;
+    grid-template-columns: 0.2fr 2fr 1fr;
+    background-color: rgba(var(--callout-rgb), 0.7);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
+.UserDetailstop {
+    position: sticky;
+    top: 0;
+    align-items: center;
+    display: grid;
+    padding: 0.5rem 0.8rem;
+    grid-template-columns: 0.2fr 2fr 1fr;
+    backdrop-filter: blur(10px) contrast(0.8);
+    background-color: rgba(var(--callout-rgb), 0.7);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
+.hello {
+    background-color: rgba(var(--primary-glow), 1);
+    border-radius: 0.2rem;
+    border: 1px solid rgba(var(--card-border-rgb), 0.4);
+    /* border: none; */
+    font: 1em sans-serif;
+    height: 2.7rem;
+    width: 100%;
+    transition: 0.4s;
+  }
+  .hello:focus {
+    outline: none;
+  }
+  .hello:hover{
+    border: 1px solid rgba(var(--card-border-rgb), 0);
+  }

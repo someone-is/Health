@@ -1,0 +1,223 @@
+.overlay {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    margin-left: -1.5rem;
+    border-radius: var(--border-radius);
+    width: 88vw;
+    height: 100vh;
+    background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.303), rgba(0, 0, 0, 0.466));
+    z-index: 10;
+    animation: backfadeIn 1s forwards;
+}
+
+
+@keyframes backfadeIn {
+    0% {
+        backdrop-filter: blur(3px) contrast(1);
+    }
+
+    100% {
+        backdrop-filter: blur(10px) contrast(0.8);
+    }
+}
+
+@keyframes backfadeOut {
+    0% {
+        backdrop-filter: blur(10px) contrast(0.8);
+    }
+
+    100% {
+        backdrop-filter: blur(3px) contrast(1);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        filter: blur(60px);
+        opacity: 0.4;
+        transform: scale(1.2);
+    }
+
+    100% {
+        filter: blur(0);
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        filter: blur(0);
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        filter: blur(60px);
+        opacity: 0.4;
+        transform: scale(1.2);
+    }
+
+}
+
+.dialog {
+    display: flex;
+    gap: 1rem;
+    background-color: rgba(0, 0, 0, 0.721);
+    width: 30rem;
+    border-radius: var(--border-radius);
+    overflow-x: hidden;
+    animation: fadeIn 1s forwards;
+}
+
+.dialog.closing {
+    animation: fadeOut 1s forwards;
+}
+
+.overlay.closing {
+    animation: backfadeOut 1s forwards;
+}
+
+.sections {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 20rem;
+    min-width: 30rem;
+    padding: 1.3rem;
+    transition: 0.5s ease-in-out;
+    /* justify-content: space-between; */
+}
+
+.sections h2,
+.sections h4,
+.sections p {
+    /* background-color: aquamarine; */
+    width: 100%;
+}
+
+.subheadings {
+    /* background: red; */
+    margin-top: 5rem;
+    width: 95%;
+}
+
+.headings {
+    /* background-color: red; */
+    background-image: linear-gradient(to bottom right, rgb(255, 0, 0), rgb(0, 10, 204));
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 1.7rem;
+    width: 95%;
+}
+
+.subheadings p {
+    text-align: center;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    /* font-weight: 700; */
+    font-family: var(--font-mono);
+    background-color: #ff5454;
+    width: 10rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.buttons {
+    margin-top: 20px;
+    /* background-color: aliceblue; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.swiped {
+    transform: translateX(-31rem);
+    /* justify-content: space-around; */
+}
+
+.inputarea {
+    /* background: red; */
+    display: grid;
+    width: max-content;
+    gap: 1rem;
+    margin: 1rem 0 2rem 0;
+}
+
+.length4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.length6 {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.inputarea input {
+    text-align: center;
+    width: 3rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--card-border-rgb);
+    font-family: var(--font-mono);
+    aspect-ratio: 1/1;
+    text-align: center;
+}
+
+.buttonsub {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #ff5454;
+    /* width: 10rem; */
+
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.h2tagsec2 {
+    margin-top: 1.7rem;
+}
+
+.ptagsec2 {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+.buttonsSub{
+    display: flex;
+    /* background-color: #156949; */
+    width: 95%;
+    justify-content: space-around;
+}
+.back {
+    display: inline-block;
+    /* margin-left: -2.15rem; */
+    letter-spacing: normal;
+    /* opacity: 0; */
+    margin-right: 1rem;
+    padding: 0.2rem 0.31rem;
+    /* font-family: '__Inter_aaf875', '__Inter_Fallback_aaf875'; */
+    background-color: rgba(var(--callout-rgb), 0.5);
+    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+    border-radius: 7px;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  @media (prefers-color-scheme: light) {
+    .overlay {
+        background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.303), rgba(255, 255, 255, 0.466));
+    }
+    .dialog {
+        background-color: rgba(255, 255, 255, 0.721);
+    }
+}

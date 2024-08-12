@@ -1,0 +1,75 @@
+.Loader {
+  position: relative;
+  width: 25px;
+  height: inherit;
+  aspect-ratio: 1/1;
+  left: 0;
+  right: 0;
+  /* top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto; */
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: antiquewhite; */
+  /* border: 1px solid red; */
+}
+
+.Loader span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  height: 75%;
+  /* background: #333; */
+  transform: rotate(calc(18deg* var(--i)));
+  /* animation: loaderAnim 1.2s linear infinite; */
+}
+
+.Loader span::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  transform: scale(0.2);
+  background: rgba(255, 255, 255, 0.875);
+  box-shadow: 0 0 20px rgb(255, 255, 255),
+    0 0 30px rgba(255, 255, 255, 0.3),
+    0 0 40px rgba(255, 255, 255, 0.3),
+    0 0 50px rgba(255, 255, 255, 0.3),
+    0 0 60px rgba(255, 255, 255, 0.704);
+  /* 0 0 70px rgba(1, 65, 255,0.3),
+                0 0 80px rgba(1, 65, 255,0.3),
+                0 0 90px rgba(1, 65, 255,0.3); */
+  /* 0 0 100px rgba(1, 65, 255, 0.3); */
+  animation: loaderAnim 2s linear infinite;
+  animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes loaderAnim {
+  0% {
+    transform: scale(1);
+    background: white;
+    /* transform: translateY(10px); */
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+    /* transform: translateX(-5px); */
+  }
+}
+@media (prefers-color-scheme: light) {
+  .Loader span::before {
+    filter: invert(1);
+  }
+}

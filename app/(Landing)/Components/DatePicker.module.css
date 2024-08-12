@@ -1,0 +1,158 @@
+.datePicker {
+  position: relative;
+  display: inline-block;
+}
+
+.input {
+  padding: 0.5rem;
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.calendar {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  background: var(--calendar-bg);
+
+  border: 1px solid var(--border-colour);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  overflow: hidden;
+  color: var(--text-color);
+  /* box-shadow: 1px 9px 32px 6px rgba(0, 0, 0, 0.75); */
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-colour);
+  /* border-bottom: 1px solid rgb(238, 238, 238); */
+  border-radius: 4px;
+  /* background-color: #043fff14; */
+  
+  background: var(--header-bg);
+  cursor: default;
+}
+.calendarHeader div{
+  border-radius: 10px;
+  background-color: var(--day-bg);
+  padding: 0.3rem;
+  width: 70%;
+  text-align: center;
+}
+.calendarBody {
+  padding: 0.5rem;
+  /* border-radius: 10px; */
+  background-color: #043fff14;
+  /* background-color: #007bff38;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
+}
+
+.Subbtn {
+  width: 100%;
+  /* background-color: #1717178f; */
+  background-color: var(--btn-bg);
+  border: 1px solid var(--btn-border-colour);
+  padding: 0.2rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.calendarWeekdays,
+.calendarDays {
+  display: grid;
+  padding: 0.3rem;
+  border-radius: 10px;
+  /* border: 1px solid white; */
+  background-color: var(--date-grid-bg);
+  /* background-color: #000000b9; */
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+}
+
+.calendarDay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  background-color: var(--day-bg);
+}
+
+.calendarDay:hover {
+  color: #000;
+}
+
+.calendarDay.selected {
+  background: var(--day-selected-bg);
+  color: #fff;
+}
+.calendarWeekdays div {
+  text-align: center;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.calendarWeekdays {
+  margin-bottom: 1rem;
+}
+
+.button {
+  padding: 0.3rem;
+  aspect-ratio: 1/1;
+  font-family: '__Inter_36bd41', '__Inter_Fallback_36bd41';
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+/* Light Mode Styles */
+@media (prefers-color-scheme: light) {
+  .datePicker {
+    --input-bg: #fff;
+    --text-color: #000;
+    --calendar-bg: #fff;
+    --header-bg: #043fff14;
+    --day-bg: #fff;
+    --day-hover-bg: #f0f0f0;
+    --day-selected-bg: #007bff;
+    --date-grid-bg: rgba(255, 255, 255, 0.311);
+    --btn-bg:rgba(0, 94, 255, 0.13);
+    --border-colour:rgb(22, 22, 22);
+    --btn-border-colour:rgb(22, 22, 22);
+  }
+
+  .calendarDay.selected:hover{
+    color: #000;
+    background-color: var(--day-selected-bg);
+  }
+  .calendarDay:hover {
+    background-color: var(--day-hover-bg);
+  }
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+  .datePicker {
+    --input-bg: #3333333e;
+    --text-color: #fff;
+    --calendar-bg: #141414;
+    --header-bg: #181818c3;
+    --day-bg: #55555500;
+    --day-hover-bg: #666;
+    --day-selected-bg: #142f89;
+    --date-grid-bg:#000000b9;
+    --btn-bg:#1717178f;
+    --border-colour:rgb(238, 238, 238);
+    --btn-border-colour:rgb(238, 238, 238);
+  }
+}

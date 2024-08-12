@@ -1,0 +1,31 @@
+/* components/InvalidIcon.module.css */
+#invalid-icon {
+  width: 100px; /* Default size, can be overridden by prop */
+  height: 100px; /* Default size, can be overridden by prop */
+}
+
+.circle {
+  transform-origin: center;
+  animation: circleScale 0.3s ease-out forwards;
+}
+
+.cross {
+  stroke-dasharray: 12;
+  stroke-dashoffset: 12;
+  animation: drawCross 0.5s 0.3s ease-out forwards;
+}
+
+@keyframes circleScale {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes drawCross {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
