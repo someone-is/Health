@@ -42,7 +42,14 @@ export async function middleware(request) {
             console.log("Logging out")
             const response = NextResponse.redirect(new URL('/', request.url))
             try {
-                response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
+                // response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
+                response.cookies.set('Login Token', '', {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    path: '/',
+                    maxAge: 0,  // Deleting the cookie
+                });
+                response.headers.set('Cache-Control', 'no-store')
                 console.log("this is Midd",response)
             } catch (error) {
                 console.log(error.message)
