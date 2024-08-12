@@ -43,7 +43,7 @@ export async function middleware(request) {
             const response = NextResponse.redirect(new URL('/', request.url))
             try {
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
-                console.log(response.cookies)
+                console.log("this is Midd",response)
             } catch (error) {
                 console.log(error.message)
             }
