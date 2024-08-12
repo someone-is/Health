@@ -41,7 +41,13 @@ export async function middleware(request) {
         if (request.nextUrl.pathname === "/Api/Logout") {
             console.log("Logging out")
             const response = NextResponse.redirect(new URL('/', request.url))
-            response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
+            // response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
+            response.cookies.set("Login Token", '', {
+                secure: process.env.NODE_ENV === 'production',
+                path: '/',
+                domain: process.env.DOMAIN_URL,  
+                maxAge: 0, 
+            });
             return response
         }
 
