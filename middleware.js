@@ -46,7 +46,7 @@ export async function middleware(request) {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 path: '/',
-                domain: process.env.DOMAIN_URL,  
+                domain: '.health-medica.vercel.app',  // Ensure domain is correct 
                 maxAge: 0, 
                 sameSite: 'Lax', 
             });
