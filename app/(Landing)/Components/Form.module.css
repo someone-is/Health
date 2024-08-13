@@ -106,6 +106,15 @@
 .searchtile:hover{
     background-color: var(--secondary-glow);
 }
+
+
+@media (min-width: 701px) and (max-width: 1120px) {
+    .form {
+        width: 80%;
+    }
+  }
+  
+
 @media (prefers-color-scheme: light) {
     .searcheddoc{
         background-color: rgb(255, 255, 255);

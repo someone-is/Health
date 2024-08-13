@@ -53,15 +53,7 @@
   .subSections textarea::-webkit-scrollbar-thumb:hover {
     background: #858585;
   }
-.dataSection {
-    position: relative;
-    overflow: hidden;
-    grid-column: span 3;
-    border-radius: var(--border-radius);
-    /* background: linear-gradient(to right, rgba(255, 0, 0, 0.093), rgba(0, 0, 0, 0.148)); */
-    backdrop-filter: blur(40px);
-    padding: 1.5rem;
-}
+  
 .dataSection {
     position: relative;
     overflow: hidden;
@@ -167,3 +159,10 @@
         background: rgba(255, 255, 255, 0.781);
     }
 }
+@media (min-width: 701px) and (max-width: 1120px) {
+    .dataSection {
+        grid-row: span 3;
+        grid-column: span 2;
+    }
+  }
+  
