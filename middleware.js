@@ -8,6 +8,7 @@ export async function middleware(request) {
     const isPreRendering = request.headers.get('x-prerender-revalidate');
     console.log("Testing the Logic",process.env.NODE_ENV === 'production' ? (isPreRendering && request.nextUrl.pathname === "/Api/Logout"):request.nextUrl.pathname === "/Api/Logout")
     console.log("Pre-rendering" ,isPreRendering)
+    console.log("Variables of logic",process.env.NODE_ENV === 'production',isPreRendering,request.nextUrl.pathname === "/Api/Logout")
     const isAccessingAuthPages = ["/Login", "/Signup"].includes(request.nextUrl.pathname)
     const isAccessingApiPages = ["/Api/Login", "/Api/User"].includes(request.nextUrl.pathname)
     const isApiRoute = request.nextUrl.pathname.startsWith("/Api")
