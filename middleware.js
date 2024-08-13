@@ -3,7 +3,9 @@ import Cookiechecker from './app/DatabaseAndFetching/Forverification/Auth'
 
 export async function middleware(request) {
     console.log("Middleware ", request.nextUrl.pathname)
+
     const token = request.cookies.get("Login Token")?.value
+    console.log(token)
     const isAccessingAuthPages = ["/Login", "/Signup"].includes(request.nextUrl.pathname)
     const isAccessingApiPages = ["/Api/Login", "/Api/User"].includes(request.nextUrl.pathname)
     const isApiRoute = request.nextUrl.pathname.startsWith("/Api")
@@ -19,13 +21,13 @@ export async function middleware(request) {
         "/Api/Login": ["admin", "doctor", "patient"]
     }
     const isUserRoute = /^\/api\/user\/[a-zA-Z0-9]+$/.test(request.nextUrl.pathname.toLowerCase());
-    console.log("dynamic",isUserRoute)
+    console.log("dynamic", isUserRoute)
     const requiredRoles = roleBasedRoutes[request.nextUrl.pathname]
     const requestedMethod = request.method
 
     // If token is available
     if (token) {
-        if (isAppointmentApiRoute|| request.nextUrl.pathname === "/Api/Searched") {
+        if (isAppointmentApiRoute || request.nextUrl.pathname === "/Api/Searched") {
             return NextResponse.next();
         }
         // For Pages
@@ -38,32 +40,29 @@ export async function middleware(request) {
             return NextResponse.next()
         }
         // For logging out
-        // if (request.nextUrl.pathname === "/Api/Logout") {
-        //     console.log("Logging out")
-        //     const response = NextResponse.redirect(new URL('/', request.url))
-        //     try {
-        //         // response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
-        //         response.cookies.set('Login Token', '', {
-        //             httpOnly: true,
-        //             secure: process.env.NODE_ENV === 'production',
-        //             path: '/',
-        //             maxAge: 0,  // Deleting the cookie
-        //         });
-        //         response.headers.set('Cache-Control', 'no-store')
-        //         console.log("this is Midd",response)
-        //     } catch (error) {
-        //         console.log(error.message)
-        //     }
-        //     // response.cookies.set("Login Token", '', {
-        //     //     httpOnly: true,
-        //     //     secure: process.env.NODE_ENV === 'production',
-        //     //     path: '/',
-        //     //     domain: '.health-medica.vercel.app',  // Ensure domain is correct 
-        //     //     maxAge: 0, 
-        //     //     sameSite: 'Lax', 
-        //     // });
-        //     return response
-        // }
+        if (request.nextUrl.pathname === "/Api/Logout") {
+            console.log("Logging out")
+            const response = NextResponse.redirect(new URL('/', request.url))
+            try {
+                response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
+
+                // response.cookies.set('Login Token', '', {
+                //     httpOnly: true,
+                //     secure: process.env.NODE_ENV === 'production',
+                //     path: '/',
+                //     // domain: '.health-medica.vercel.app',
+                //     maxAge: 0,
+                //     // sameSite: 'Lax', 
+                // });
+                // response.headers.set('Cache-Control', 'no-store')
+                
+                console.log("this is Midd", response)
+            } catch (error) {
+                console.log(error.message)
+            }
+
+            return response
+        }
 
         // For API Routes
         if (isApiRoute) {
@@ -72,9 +71,9 @@ export async function middleware(request) {
             if (user !== null) {
                 console.log(`Roles ${user.as} allowed -`, requiredRoles?.includes(user.as))
                 console.log("Checking for the valid user token...")
-                console.log(user.as === "admin",isAdminApiRoute)
-                console.log(request.nextUrl.pathname.split("/")[request.nextUrl.pathname.split("/").length-1])
-                if (isUserRoute && user.userId === request.nextUrl.pathname.split("/")[request.nextUrl.pathname.split("/").length-1]) {
+                console.log(user.as === "admin", isAdminApiRoute)
+                console.log(request.nextUrl.pathname.split("/")[request.nextUrl.pathname.split("/").length - 1])
+                if (isUserRoute && user.userId === request.nextUrl.pathname.split("/")[request.nextUrl.pathname.split("/").length - 1]) {
                     console.log("Sirf main hi apna details badal sakta hu")
                     return NextResponse.next();
                 }
@@ -93,10 +92,10 @@ export async function middleware(request) {
                     console.log("Logging in with more than one account at one time is currently not availabe")
                     return NextResponse.json({ message: 'Logging in with more than one account at one time is currently not availabe', success: false });
                 }
-                if (requiredRoles?.includes(user.as) && request.nextUrl.pathname==="/Api/User/Doctor" || request.nextUrl.pathname==="/Api/User/Parient") {
+                if (requiredRoles?.includes(user.as) && request.nextUrl.pathname === "/Api/User/Doctor" || request.nextUrl.pathname === "/Api/User/Parient") {
                     return NextResponse.next();
                 }
-                
+
                 console.log("you're not allowed to use - ", request.nextUrl.pathname, "- with -", requestedMethod, "- method")
                 return NextResponse.json({ message: `You must be logged in, as ${requiredRoles} to be able to access this Url`, success: false });
             }
@@ -128,7 +127,7 @@ export async function middleware(request) {
         }
 
         // For Appointment Routes
-        if (isAppointmentApiRoute|| request.nextUrl.pathname === "/Api/Searched") {
+        if (isAppointmentApiRoute || request.nextUrl.pathname === "/Api/Searched") {
             return NextResponse.next();
         }
     }
