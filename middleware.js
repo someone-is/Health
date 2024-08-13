@@ -3,9 +3,11 @@ import Cookiechecker from './app/DatabaseAndFetching/Forverification/Auth'
 
 export async function middleware(request) {
     console.log("Middleware ", request.nextUrl.pathname)
-
+    console.log("Testing the Logic",process.env.NODE_ENV === 'production' ? (isPreRendering && request.nextUrl.pathname === "/Api/Logout"):request.nextUrl.pathname === "/Api/Logout")
     const token = request.cookies.get("Login Token")?.value
     console.log(token)
+    const isPreRendering = request.headers.get('x-prerender-revalidate');
+    console.log("Pre-rendering" ,isPreRendering)
     const isAccessingAuthPages = ["/Login", "/Signup"].includes(request.nextUrl.pathname)
     const isAccessingApiPages = ["/Api/Login", "/Api/User"].includes(request.nextUrl.pathname)
     const isApiRoute = request.nextUrl.pathname.startsWith("/Api")
@@ -40,7 +42,7 @@ export async function middleware(request) {
             return NextResponse.next()
         }
         // For logging out
-        if (request.nextUrl.pathname === "/Api/Logout") {
+        if (process.env.NODE_ENV === 'production' ? (isPreRendering && request.nextUrl.pathname === "/Api/Logout"):request.nextUrl.pathname === "/Api/Logout") {
             console.log("Logging out")
             const response = NextResponse.redirect(new URL('/', request.url))
             try {
