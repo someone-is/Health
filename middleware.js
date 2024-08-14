@@ -7,7 +7,7 @@ export async function middleware(request) {
     const token = request.cookies.get("Login Token")?.value
     // console.log(token)
     // const isPreRendering = request.headers.get('x-prerender-revalidate');
-    let isPreRendering = false;
+    let isPreRendering ;
     console.log("this is prerendering", isPreRendering)
     // console.log("Testing the Logic",process.env.NODE_ENV === 'production' ? (isPreRendering && request.nextUrl.pathname === "/Api/Logout"):request.nextUrl.pathname === "/Api/Logout")
     // console.log("Pre-rendering" ,isPreRendering)
