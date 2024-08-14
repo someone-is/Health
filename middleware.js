@@ -53,13 +53,14 @@ export async function middleware(request) {
 
         // For logging out
         if (request.nextUrl.pathname === "/Api/Logout") {
-            console.log("Logging out")
             // isPreRendering = false
             const response = NextResponse.redirect(new URL('/', request.url))
             // console.log(response)
             if (process.env.NODE_ENV === 'production' && !isPreRendering) {
+                console.log("Logging out 1")
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
-            } else {
+            } else if (process.env.NODE_ENV !== 'production') {
+                console.log("Logging out 2")
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
             }
 
