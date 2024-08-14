@@ -8,7 +8,7 @@ export async function middleware(request) {
     // console.log(token)
     // const isPreRendering = request.headers.get('x-prerender-revalidate');
     let isPreRendering = false;
-    console.log("this is prerendering",isPreRendering)
+    console.log("this is prerendering", isPreRendering)
     // console.log("Testing the Logic",process.env.NODE_ENV === 'production' ? (isPreRendering && request.nextUrl.pathname === "/Api/Logout"):request.nextUrl.pathname === "/Api/Logout")
     // console.log("Pre-rendering" ,isPreRendering)
     // console.log("Variables of logic",process.env.NODE_ENV === 'production',isPreRendering,request.nextUrl.pathname === "/Api/Logout")
@@ -45,21 +45,21 @@ export async function middleware(request) {
             isPreRendering = true
             setTimeout(() => {
                 isPreRendering = false
-            }, 1000);
+            }, 10000);
             // console.log("It is ok to go to the Account page When Logged in")
-            console.log("this is prerendering",isPreRendering)
+            console.log("this is prerendering", isPreRendering)
             return NextResponse.next()
         }
 
         // For logging out
         if (request.nextUrl.pathname === "/Api/Logout") {
-            // console.log("Logging out")
+            console.log("Logging out")
             // isPreRendering = false
             const response = NextResponse.redirect(new URL('/', request.url))
             // console.log(response)
-            if (process.env.NODE_ENV === 'production'&&!isPreRendering) {
+            if (process.env.NODE_ENV === 'production' && !isPreRendering) {
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
-            }else{
+            } else {
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
             }
 
@@ -143,7 +143,7 @@ export async function middleware(request) {
             return NextResponse.next();
         }
     }
-    
+
 }
 
 export const config = {
