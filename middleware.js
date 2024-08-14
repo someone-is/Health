@@ -54,7 +54,7 @@ export async function middleware(request) {
             // isPreRendering = false
             const response = NextResponse.redirect(new URL('/', request.url))
             // console.log(response)
-            if (process.env.NODE_ENV === 'production' && isPreRendering === false) {
+            if (process.env.NODE_ENV === 'production' && isPreRendering !== undefined) {
                 console.log("Logging out 1")
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
             } else if (process.env.NODE_ENV !== 'production') {
