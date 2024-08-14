@@ -3,9 +3,11 @@ import Cookiechecker from './app/DatabaseAndFetching/Forverification/Auth'
 
 export async function middleware(request) {
     console.log("Middleware ", request.nextUrl.pathname)
+    console.log("this is a request",request)
     const token = request.cookies.get("Login Token")?.value
     console.log(token)
-    const isPreRendering = request.headers.get('x-prerender-revalidate');
+    // const isPreRendering = request.headers.get('x-prerender-revalidate');
+    const isPreRendering = true;
     console.log("Testing the Logic",process.env.NODE_ENV === 'production' ? (isPreRendering && request.nextUrl.pathname === "/Api/Logout"):request.nextUrl.pathname === "/Api/Logout")
     console.log("Pre-rendering" ,isPreRendering)
     console.log("Variables of logic",process.env.NODE_ENV === 'production',isPreRendering,request.nextUrl.pathname === "/Api/Logout")
@@ -43,9 +45,11 @@ export async function middleware(request) {
             return NextResponse.next()
         }
         // For logging out
-        if (process.env.NODE_ENV === 'production' ? (isPreRendering && request.nextUrl.pathname === "/Api/Logout"):request.nextUrl.pathname === "/Api/Logout") {
+        if (request.nextUrl.pathname === "/Api/Logout") {
             console.log("Logging out")
+            // isPreRendering = false
             const response = NextResponse.redirect(new URL('/', request.url))
+            console.log(response)
             try {
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
 
@@ -59,10 +63,10 @@ export async function middleware(request) {
                 // });
                 // response.headers.set('Cache-Control', 'no-store')
                 
-                console.log("this is Midd", response)
             } catch (error) {
                 console.log(error.message)
             }
+            console.log("this is Midd", response)
 
             return response
         }
