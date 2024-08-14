@@ -42,7 +42,7 @@ export async function middleware(request) {
             return NextResponse.redirect(new URL('/', request.url))
         }
         if (request.nextUrl.pathname === "/Account/Profile") {
-            isPreRendering = true
+            isPreRendering = false
           
             // console.log("It is ok to go to the Account page When Logged in")
             console.log("this is prerendering", isPreRendering)
@@ -54,7 +54,7 @@ export async function middleware(request) {
             // isPreRendering = false
             const response = NextResponse.redirect(new URL('/', request.url))
             // console.log(response)
-            if (process.env.NODE_ENV === 'production' && !isPreRendering) {
+            if (process.env.NODE_ENV === 'production' && isPreRendering === false) {
                 console.log("Logging out 1")
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
             } else if (process.env.NODE_ENV !== 'production') {
