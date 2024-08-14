@@ -43,9 +43,7 @@ export async function middleware(request) {
         }
         if (request.nextUrl.pathname === "/Account/Profile") {
             isPreRendering = true
-            setTimeout(() => {
-                isPreRendering = false
-            }, 10000);
+          
             // console.log("It is ok to go to the Account page When Logged in")
             console.log("this is prerendering", isPreRendering)
             return NextResponse.next()
