@@ -18,16 +18,8 @@ export async function POST(request) {
             if (bcrypt.compareSync(password,Userindb.password)) {
                 const token = jwt.sign({_id:Userindb.userId, name:Userindb.name, as:Userindb.as},process.env.JWT_CODE)
                 const response = NextResponse.json({result: `${Userindb.name} has Logged in`, success: true})
-                // response.cookies.set("Login Token", token,{expiresIn: "1d"})
-                response.cookies.set("Login Token", token, {
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production',
-                    path: '/',
-                    // maxAge: 10,  // 10sec in seconds
-                    // domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN_URL : undefined,
-                    maxAge: 24 * 60 * 60,  // 1 day in seconds
-                    sameSite: 'Lax',  // Adjust to 'Strict' or 'None' if necessary
-                });
+                response.cookies.set("Login Token", token,{maxAge: 24 * 60 * 60})
+
                 return response
             }
             else{
