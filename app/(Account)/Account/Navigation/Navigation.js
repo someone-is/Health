@@ -94,7 +94,7 @@ const Navigation = () => {
           )
         )}
       </ul>
-        <Link href={"/Api/Logout"}><ShinyRippleButton extraLeave={40} extraMove={158}>Log Out</ShinyRippleButton></Link>
+        <a href={"/Api/Logout"}><ShinyRippleButton extraLeave={40} extraMove={158}>Log Out</ShinyRippleButton></a>
     </nav>
   )
 }
