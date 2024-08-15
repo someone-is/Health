@@ -86,6 +86,7 @@ const ManageUser = ({ searchParams }) => {
 
   useEffect(() => {
     getUsers();
+    console.log("first I am workin from Manage User")
   }, [Notify]);
 
   return (
