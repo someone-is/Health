@@ -33,6 +33,9 @@
   overflow-x: hidden;
   overflow-y: scroll;
 }
+.page:focus-visible {
+  outline: none;
+}
 
 .page::-webkit-scrollbar {
   width: 5px;

@@ -13,7 +13,7 @@ export async function GET(request) {
             const userdata = await Doctordata.findOne({ userId: cookiedata._id })
             return NextResponse.json({ doctordata: userdata, message: `${cookiedata.as}Data Received`, success: true })
         } else {
-            return NextResponse.json({ meaasge: 'User must be doctor', success: false})
+            return NextResponse.json({ message: 'User must be doctor', success: false})
         }
 
     } catch (error) {

@@ -13,7 +13,7 @@ export async function GET(request) {
             const userdata = await Admindata.findOne({ userId: cookiedata._id })
             return NextResponse.json({ admindata: userdata, message: `${cookiedata.as}Data Received`, success: true })
         } else {
-            return NextResponse.json({ meaasge: 'User must be admin', success: false })
+            return NextResponse.json({ message: 'User must be admin', success: false })
         }
     } catch (error) {
         return NextResponse.json({ message: error.message, success: false })

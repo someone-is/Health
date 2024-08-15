@@ -9,7 +9,7 @@ import CreateDialog from '../../Components/SecurityDialog/CreateDialog';
 
 
 const ManageUser = ({ searchParams }) => {
- 
+
   const isPasskey = searchParams.passkey === 'true';
   const notPasskey = searchParams.passkey === 'false';
   const router = useRouter();

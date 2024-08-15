@@ -54,6 +54,7 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
         console.log("Clicked")
         try {
             if (role === 'admin') {
+                console.log("first is admin")
                 const response = await fetch("/Api/User/Admin/Data", {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
@@ -62,6 +63,7 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
 
                 const data = await response.json()
             } else if (role === 'doctor') {
+                console.log("second is doctor")
                 const response = await fetch("/Api/User/Doctor", {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
@@ -70,6 +72,7 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
 
                 const data = await response.json()
             } else if (role === 'patient') {
+                console.log("third is patient")
                 const response = await fetch("/Api/User/Patient", {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
@@ -77,6 +80,7 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
                 })
 
                 const data = await response.json()
+                console.log(data)
             }
             router.push("/Account/Profile")
             router.refresh()
