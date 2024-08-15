@@ -6,7 +6,6 @@ import { useOmnipresence } from '@/app/Context/Omnipresent';
 import { useRouter } from 'next/navigation';
 import SecurityDialog from '../../Components/SecurityDialog/SecurityDialog';
 import CreateDialog from '../../Components/SecurityDialog/CreateDialog';
-import { revalidateTag } from 'next/cache';
 
 
 const ManageUser = ({ searchParams }) => {
@@ -28,7 +27,7 @@ const ManageUser = ({ searchParams }) => {
 
   const getUsers = async () => {
 
-    const response = await fetch("/Api/User/Admin", { next: { tags: ["roles"] } });
+    const response = await fetch("/Api/User/Admin", { cache: "no-store" });
     const dataresponse = await fetch("/Api/User/Admin/Data");
     const { admindata } = await dataresponse.json();
     console.log(admindata)
@@ -53,7 +52,7 @@ const ManageUser = ({ searchParams }) => {
   }, []);
 
   const handleRoleChange = async (event, userId) => {
-    revalidateTag("roles")
+
     const { value } = event.target;
     setChosenRole(value)
     set_id(userId)
