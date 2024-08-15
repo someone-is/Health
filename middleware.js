@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
 import Cookiechecker from './app/DatabaseAndFetching/Forverification/Auth'
-
+let Prerenderingreq= 0
 export async function middleware(request) {
     // console.log("Middleware ", request.nextUrl.pathname)
     // console.log("this is a request",request)
     const token = request.cookies.get("Login Token")?.value
     // console.log(token)
     // const isPreRendering = request.headers.get('x-prerender-revalidate');
-    let isPreRendering ;
-    console.log("this is prerendering", isPreRendering)
+
+    console.log("this is prerendering", Prerenderingreq)
     // console.log("Testing the Logic",process.env.NODE_ENV === 'production' ? (isPreRendering && request.nextUrl.pathname === "/Api/Logout"):request.nextUrl.pathname === "/Api/Logout")
     // console.log("Pre-rendering" ,isPreRendering)
     // console.log("Variables of logic",process.env.NODE_ENV === 'production',isPreRendering,request.nextUrl.pathname === "/Api/Logout")
@@ -42,12 +42,8 @@ export async function middleware(request) {
             return NextResponse.redirect(new URL('/', request.url))
         }
         if (request.nextUrl.pathname === "/Account/Profile") {
-            isPreRendering = false
-          setTimeout(() => {
-            isPreRendering = undefined
-          }, 10000);
+           
             // console.log("It is ok to go to the Account page When Logged in")
-            console.log("this is prerendering", isPreRendering)
             return NextResponse.next()
         }
 
@@ -56,11 +52,19 @@ export async function middleware(request) {
             // isPreRendering = false
             const response = NextResponse.redirect(new URL('/', request.url))
             // console.log(response)
-            if (process.env.NODE_ENV === 'production' && isPreRendering !== undefined) {
+            if (process.env.NODE_ENV === 'production' && Prerenderingreq === 0) {
+                console.log("It is Prerendering. So No Log out allowed")
+                Prerenderingreq++
+            } else if (process.env.NODE_ENV === 'production' && Prerenderingreq > 0) {
                 console.log("Logging out 1")
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
-            } else if (process.env.NODE_ENV !== 'production') {
-                console.log("Logging out 2")
+            }
+            else if (process.env.NODE_ENV !== 'production' && Prerenderingreq === 0) {
+                console.log("First Try Logging out")
+                Prerenderingreq++
+            }
+            else if (process.env.NODE_ENV !== 'production' && Prerenderingreq > 0) {
+                console.log("Second Try Logging out")
                 response.cookies.set('Login Token', '', { maxAge: 0, path: '/' })
             }
 
