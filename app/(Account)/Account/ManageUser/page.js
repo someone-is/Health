@@ -6,6 +6,7 @@ import { useOmnipresence } from '@/app/Context/Omnipresent';
 import { useRouter } from 'next/navigation';
 import SecurityDialog from '../../Components/SecurityDialog/SecurityDialog';
 import CreateDialog from '../../Components/SecurityDialog/CreateDialog';
+import { unstable_noStore } from 'next/cache';
 
 
 const ManageUser = ({ searchParams }) => {
@@ -26,6 +27,7 @@ const ManageUser = ({ searchParams }) => {
   });
 
   const getUsers = async () => {
+    unstable_noStore();
     const response = await fetch("/Api/User/Admin");
     const dataresponse = await fetch("/Api/User/Admin/Data");
     const { admindata } = await dataresponse.json();
@@ -100,7 +102,7 @@ const ManageUser = ({ searchParams }) => {
             <h3 className={styles.tags} onClick={() => toggleSection(roleType)}>
               {roleType.charAt(0).toUpperCase() + roleType.slice(1)}s
             </h3>
-            <div className={`${styles.content} ${expandedSections[roleType] ? styles.expanded : ''}`}>
+            {/* <div className={`${styles.content} ${expandedSections[roleType] ? styles.expanded : ''}`}>
               <div className={styles.UserDetailstop}>
                 <span># </span>
                 <h4>Name</h4>
@@ -122,7 +124,31 @@ const ManageUser = ({ searchParams }) => {
                   </select>
                 </div>
               ))}
+            </div> */}
+            <div className={`${styles.content} ${expandedSections[roleType] ? styles.expanded : ''}`}>
+              <div className={styles.UserDetailstop}>
+                <span># </span>
+                <h4>Name</h4>
+                <h4>Role</h4>
+              </div>
+              {user?.[roleType]?.map((user, index) => (
+                <div className={`${styles.UserDetails} ${expandedSections[roleType] ? styles.expanded : ''}`} key={user._id}>
+                  <span>{index + 1}. </span>
+                  {user.name}
+                  <select
+                    name="role"
+                    id={`Role:${user._id}`}
+                    value={roles[user._id]}
+                    onChange={(e) => handleRoleChange(e, user._id)}
+                  >
+                    <option value="admin">Admin</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="patient">Patient</option>
+                  </select>
+                </div>
+              ))}
             </div>
+
           </React.Fragment>
         ))}
       </div>
