@@ -27,7 +27,7 @@ const ManageUser = ({ searchParams }) => {
 
   const getUsers = async () => {
 
-    const response = await fetch("/Api/User/Admin", { cache: "no-store" });
+    const response = await fetch("/Api/User/Admin", { next: { revalidate: 0 } });
     const dataresponse = await fetch("/Api/User/Admin/Data");
     const { admindata } = await dataresponse.json();
     console.log(admindata)
