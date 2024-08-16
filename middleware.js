@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import Cookiechecker from './app/DatabaseAndFetching/Forverification/Auth'
 
 export async function middleware(request) {
-    // console.log("Middleware ", request.nextUrl.pathname)
+    console.log("Middleware ", request.nextUrl.pathname)
     const token = request.cookies.get("Login Token")?.value
     // console.log(token)
     const isAccessingAuthPages = ["/Login", "/Signup"].includes(request.nextUrl.pathname)
@@ -17,7 +17,8 @@ export async function middleware(request) {
         "/Api/User/Doctor": ["doctor"],
         "/Api/User/Patient": ["patient"],
         "/Api/User/Profile": ["admin", "doctor", "patient"],
-        "/Api/Login": ["admin", "doctor", "patient"]
+        "/Api/Login": ["admin", "doctor", "patient"],
+        "/Api/Revalidate":["admin"]
     }
     const isUserRoute = /^\/api\/user\/[a-zA-Z0-9]+$/.test(request.nextUrl.pathname.toLowerCase());
     // console.log("dynamic", isUserRoute)

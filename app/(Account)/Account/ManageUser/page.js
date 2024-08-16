@@ -18,6 +18,7 @@ const ManageUser = ({ searchParams }) => {
   const [ChosenRole, setChosenRole] = useState()
   const [_id, set_id] = useState()
   const [roles, setRoles] = useState({});
+  const [Refresh, setRefresh] = useState(true)
   const { Notify, correct } = useOmnipresence();
   const [expandedSections, setExpandedSections] = useState({
     admin: false,
@@ -51,6 +52,15 @@ const ManageUser = ({ searchParams }) => {
     }));
   }, []);
 
+  const refreshdata = async () => {
+    if (Refresh) {
+      setRefresh(false) 
+      console.log("refreshing")
+      router.refresh();
+    }
+    console.log("no refresh")
+  };
+
   const handleRoleChange = async (event, userId) => {
 
     const { value } = event.target;
@@ -71,10 +81,10 @@ const ManageUser = ({ searchParams }) => {
       // console.log(data)
       if (data.status) {
         Notify({ message: data.result, status: data.status })
-        console.log('Roles updated successfully',data);
+        console.log('Roles updated successfully', data);
       } else {
         Notify({ message: data.message, status: data.status })
-        console.log('Failed to update roles',data);
+        console.log('Failed to update roles', data);
       }
     } else {
       if (userdata.passkey) {
@@ -99,7 +109,7 @@ const ManageUser = ({ searchParams }) => {
       <div>
         {['admin', 'doctor', 'patient'].map((roleType, idx) => (
           <React.Fragment key={roleType}>
-            <h3 className={styles.tags} onClick={() => toggleSection(roleType)}>
+            <h3 className={styles.tags} onClick={() => { toggleSection(roleType); refreshdata(); }}>
               {roleType.charAt(0).toUpperCase() + roleType.slice(1)}s
             </h3>
             {/* <div className={`${styles.content} ${expandedSections[roleType] ? styles.expanded : ''}`}>
