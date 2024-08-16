@@ -27,7 +27,7 @@ const ManageUser = ({ searchParams }) => {
 
   const getUsers = async () => {
 
-    const response = await fetch("/Api/User/Admin", { next: { revalidate: 0 } });
+    const response = await fetch("/Api/User/Admin");
     const dataresponse = await fetch("/Api/User/Admin/Data");
     const { admindata } = await dataresponse.json();
     console.log(admindata)
@@ -136,7 +136,8 @@ const ManageUser = ({ searchParams }) => {
                   <span>{index + 1}. </span>
                   {user.name}
                   <select
-                    name="role"
+                    name={`${user.name}-role`}
+                    title={user.name}
                     id={`Role:${user._id}`}
                     value={roles[user._id]}
                     onChange={(e) => handleRoleChange(e, user._id)}
