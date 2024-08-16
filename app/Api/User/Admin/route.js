@@ -14,7 +14,7 @@ export async function GET() {
             // const dog = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Api/Revalidate?secret=${process.env.REVALIDATE_SECRET}`);
             // console.log("dfasfksdlfk", ` djfnds${dog}   dfndskf`)
             const response = NextResponse.json({ user:{admin, doctor, patient}, success: true })
-            response.headers.set('Cache-Control', 's-maxage=60, stale-while-revalidate=59');
+            response.headers.set('Cache-Control', 'no-store');
             return response
 
     } catch (error) {
