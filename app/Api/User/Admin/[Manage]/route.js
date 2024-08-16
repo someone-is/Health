@@ -20,6 +20,9 @@ export async function PUT(request, { params }) {
         }
         const updatedUser = await finduser.save();
         await Updateingdata(updatedUser, previousrole);
+        const reval = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Api/Revalidate?secret=${process.env.REVALIDATE_SECRET}`);
+        const response = await reval.json();
+        console.log("Revalidation",response)
         return NextResponse.json({ result: `${finduser.name} has Successfully Updated as ${as}`, updatedUser, status: true })
 
     } catch (error) {
@@ -27,17 +30,17 @@ export async function PUT(request, { params }) {
     }
 }
 const Updateingdata = async (user, previousRole) => {
-   
+
     if (user.as === 'admin') {
         let prevdata = {}
         if (previousRole === 'admin') {
             prevdata = await Admindata.findOne({ userId: user.userId })
-          
+
             await Admindata.findOneAndDelete({ userId: user.userId });
         }
         if (previousRole === 'doctor') {
             prevdata = await Doctordata.findOne({ userId: user.userId })
-            
+
             await Doctordata.findOneAndDelete({ userId: user.userId });
         }
         if (previousRole === 'patient') {
@@ -47,9 +50,9 @@ const Updateingdata = async (user, previousRole) => {
         const adminData = {
             userId: user.userId,
             name: user.name,
-            address: prevdata?.address, // Add logic to get address
-            gender: prevdata?.gender, // Add logic to get gender
-            phoneNumber: prevdata?.phoneNumber, // Add logic to get phone number
+            address: prevdata?.address,
+            gender: prevdata?.gender,
+            phoneNumber: prevdata?.phoneNumber,
         };
         await Admindata.findOneAndUpdate(
             { userId: user.userId },
@@ -61,15 +64,15 @@ const Updateingdata = async (user, previousRole) => {
         let prevdata = {}
         if (previousRole === 'admin') {
             prevdata = await Admindata.findOne({ userId: user.userId })
-                        await Admindata.findOneAndDelete({ userId: user.userId });
+            await Admindata.findOneAndDelete({ userId: user.userId });
         }
         if (previousRole === 'doctor') {
             prevdata = await Doctordata.findOne({ userId: user.userId })
-                        await Doctordata.findOneAndDelete({ userId: user.userId });
+            await Doctordata.findOneAndDelete({ userId: user.userId });
         }
         if (previousRole === 'patient') {
             prevdata = await Patientdata.findOne({ userId: user.userId })
-                        await Patientdata.findOneAndDelete({ userId: user.userId });
+            await Patientdata.findOneAndDelete({ userId: user.userId });
         }
         const doctorData = {
             userId: user.userId,
@@ -92,12 +95,12 @@ const Updateingdata = async (user, previousRole) => {
         }
         if (previousRole === 'doctor') {
             prevdata = await Doctordata.findOne({ userId: user.userId })
-            
+
             await Doctordata.findOneAndDelete({ userId: user.userId });
         }
         if (previousRole === 'patient') {
             prevdata = await Patientdata.findOne({ userId: user.userId })
-            
+
             await Patientdata.findOneAndDelete({ userId: user.userId });
         }
         const patientData = {
