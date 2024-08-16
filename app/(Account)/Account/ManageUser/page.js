@@ -71,10 +71,10 @@ const ManageUser = ({ searchParams }) => {
       // console.log(data)
       if (data.status) {
         Notify({ message: data.result, status: data.status })
-        console.log('Roles updated successfully');
+        console.log('Roles updated successfully',data);
       } else {
         Notify({ message: data.message, status: data.status })
-        console.log('Failed to update roles');
+        console.log('Failed to update roles',data);
       }
     } else {
       if (userdata.passkey) {
