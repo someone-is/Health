@@ -55,8 +55,8 @@ const ManageUser = ({ searchParams }) => {
   const refreshdata = async () => {
     // if (Refresh) {
       // setRefresh(false) 
-      console.log("refreshing")
-      router.refresh();
+      console.log("dummy refreshing")
+      // router.refresh();
     // }
     // console.log("no refresh")
   };
