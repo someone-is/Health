@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{cache} from 'react'
 import design from '../../account.module.css'
 // import CurrentUser from '@/app/ServersideFetching/CurrentUser'
 import styles from './profile.module.css'
@@ -7,12 +7,17 @@ import CurrentUser from '@/app/DatabaseAndFetching/ServersideFetching/CurrentUse
 import Centersection from '../../Components/ClientComponent/CentersectionEdit'
 import Rightbar from '../../Components/ClientComponent/Rightbar'
 
+const GetProfileData = cache(async()=>{const {user, Userdata} = await CurrentUser();
+ return ({user,Userdata})})
+
 const Account = async ({ searchParams }) => {
+  const { user, Userdata } = await GetProfileData();
+  // console.log( "this is cached data",  user, Userdata  )
   const isPath = searchParams
   console.log(isPath)
   const isEditing = searchParams.Modifying === 'true'
   console.log(isEditing)
-  const { user, Userdata } = await CurrentUser()
+  // const { user, Userdata } = await CurrentUser()
 
   return (
     <div className={design.page}>
