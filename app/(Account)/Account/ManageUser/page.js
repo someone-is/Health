@@ -53,12 +53,12 @@ const ManageUser = ({ searchParams }) => {
   }, []);
 
   const refreshdata = async () => {
-    if (Refresh) {
-      setRefresh(false) 
+    // if (Refresh) {
+      // setRefresh(false) 
       console.log("refreshing")
       router.refresh();
-    }
-    console.log("no refresh")
+    // }
+    // console.log("no refresh")
   };
 
   const handleRoleChange = async (event, userId) => {
