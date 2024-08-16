@@ -10,7 +10,12 @@ export async function GET() {
             const patient = await User.find({as:"patient"}).select('-password');
             const doctor = await User.find({as:"doctor"}).select('-password');
             const admin = await User.find({as:"admin"}).select('-password');
-            return NextResponse.json({ user:{admin, doctor, patient}, success: true })
+
+            // const dog = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Api/Revalidate?secret=${process.env.REVALIDATE_SECRET}`);
+            // console.log("dfasfksdlfk", ` djfnds${dog}   dfndskf`)
+            const response = NextResponse.json({ user:{admin, doctor, patient}, success: true })
+            response.headers.set('Cache-Control', 's-maxage=60, stale-while-revalidate=59');
+            return response
 
     } catch (error) {
         return NextResponse.json({ message: "You must be logged in, as an ADMIN to be able to access this Url", Technical_message: error.message, success: false })
