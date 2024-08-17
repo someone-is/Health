@@ -12,11 +12,11 @@ const page = async ({ params, searchParams }) => {
     const docdata = await GetThatDoctor(doctor)
     const doc = docdata.doctor
     return (
-        <>
-            {isBooking && <Booking name={doc.name} _id={doctor} />}
             <main className={design.main}>
+            {isBooking && <Booking name={doc.name} _id={doctor} />}
                 <div className={design.description}>
                     <p>
+                        <span><Link href={"/"}><ShinyRippleButton CustomDesign={design.back} extraLeave={20} extraMove={40} >&lt;-</ShinyRippleButton></Link></span>
                         <span>All your health info at your fingertips!&nbsp;</span>
                         <code className={styles.code}>| Dr. {doc?.name}</code>
                     </p>
@@ -65,7 +65,6 @@ const page = async ({ params, searchParams }) => {
                 </div>
                 <Image src='/undraw_art_re_vj2w.svg' className={design.backgr} alt="background" width={1920} height={1080} priority />
             </main>
-        </>
     )
 }
 

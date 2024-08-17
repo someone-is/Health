@@ -1,5 +1,5 @@
 .overlayBack {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -8,7 +8,16 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.466);
+    animation: fadebgIn 1s forwards;
+    transform-style: preserve-3d;
+    overflow: hidden;
+    scroll-behavior: none;
+    perspective: 1000px;
     z-index: 10;
+}
+
+.overlayBack.closing {
+    animation: fadebgOut 1s forwards;
 }
 
 .modal {
@@ -17,14 +26,66 @@
     height: max-content;
     background-color: rgba(var(--callout-rgb), 0.5);
     backdrop-filter: blur(30px) contrast(1.3);
-    padding: 2rem;
+    padding: 1.8rem;
     border-radius: var(--border-radius);
+    animation: fadeIn 0.5s forwards;
+    overflow: hidden;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.back {
+    display: flex;
+    align-items: center;
+    padding: 4px 0 0 0;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    background-color: rgba(var(--callout-rgb), 0);
+    border: none;
+    /* border: 1px solid rgba(var(--callout-border-rgb), 0); */
+    border-radius: var(--border-radius);
+    transition: all 0.5s;
+}
+
+.back:hover {
+    /* border-color: rgba(255, 0, 0, 0.548); */
+    /* transform: translateX(-2px); */
+    box-shadow: -1px -1px 300px 31px rgba(255,0,0,1);
+    /* box-shadow: -1px -1px 69px -8px rgb(255, 0, 0); */
+}
+
+.back:active {
+    transform: scale(0.95);
+}
+
+.cross {
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: all 0.5s;
+}
+
+.cross:hover {
+    /* background-color: #ffffff27; */
+    transform: scale(1.1);
+}
+
+.modal.closing {
+    animation: fadeOut 0.5s forwards;
+}
+
+.modal.crossclosing {
+    animation: fadeOutCross 0.5s forwards;
 }
 
 .modal form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem 2rem;
+    gap: 0.6rem 2rem;
 }
 
 .sections {
@@ -33,6 +94,7 @@
     gap: 0.2rem;
 }
 
+.sections select,
 .sections input {
     padding: 0.5rem;
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
@@ -60,15 +122,84 @@
     cursor: pointer;
 }
 
+@keyframes fadebgIn {
+    0% {
+        background-color: #00000000;
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0.466);
+    }
+}
+
+@keyframes fadebgOut {
+    0% {
+        background-color: rgba(0, 0, 0, 0.466);
+    }
+
+    100% {
+        background-color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        filter: blur(60px);
+        opacity: 0;
+        transform: translateZ(100px) translateY(-10rem) rotateX(20deg);
+    }
+
+    100% {
+        filter: blur(0);
+        opacity: 1;
+        transform: translateZ(0) translateY(0) rotateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        filter: blur(0);
+        opacity: 1;
+        /* transform: scale(1) translateY(0); */
+        transform: translateZ(0) translateY(0) rotateX(0);
+    }
+
+    100% {
+        filter: blur(70px);
+        opacity: 0;
+        /* transform: scale(1.2) translateY(-4rem); */
+        transform: translateZ(100px) translateY(10rem) rotateX(20deg);
+    }
+}
+
+@keyframes fadeOutCross {
+    0% {
+        filter: blur(0px);
+        opacity: 1;
+        transform: translateZ(0) translateY(0) rotateX(0);
+    }
+
+    100% {
+        filter: blur(70px);
+        opacity: 0;
+        transform: translateZ(100px) translateY(-10rem) rotateX(20deg);
+    }
+}
+
+.sections .focusedWorng {
+    border: 1px solid red;
+    /* background-color: red; */
+}
+
 @media (prefers-color-scheme: light) {
     .subbtn {
         background-color: #000000cb;
         color: #ffffff;
     }
 }
+
 @media (min-width: 701px) and (max-width: 1120px) {
     .modal {
         width: 70%;
     }
-  }
-  
+}

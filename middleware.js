@@ -9,7 +9,8 @@ export async function middleware(request) {
     const isAccessingApiPages = ["/Api/Login", "/Api/User"].includes(request.nextUrl.pathname)
     const isApiRoute = request.nextUrl.pathname.startsWith("/Api")
     const isAdminApiRoute = request.nextUrl.pathname.startsWith("/Api/User/Admin/")
-    const isAppointmentApiRoute = request.nextUrl.pathname.startsWith("/Api/Appointments")
+    const isAppointmentApiRoute = request.nextUrl.pathname.startsWith("/Api/Appointment")
+    console.log("middddddd",isAppointmentApiRoute)
     const roleBasedRoutes = {
         "/Api/User/Admin": ["admin"],
         "/Api/User/Admin/Data": ["admin"],
@@ -87,6 +88,9 @@ export async function middleware(request) {
                     return NextResponse.json({ message: 'Logging in with more than one account at one time is currently not availabe', success: false });
                 }
                 if (requiredRoles?.includes(user.as) && request.nextUrl.pathname === "/Api/User/Doctor" || request.nextUrl.pathname === "/Api/User/Patient") {
+                    return NextResponse.next();
+                }
+                if (isAppointmentApiRoute || request.nextUrl.pathname === "/Api/Searched") {
                     return NextResponse.next();
                 }
 
