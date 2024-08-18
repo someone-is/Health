@@ -53,12 +53,7 @@ const ManageUser = ({ searchParams }) => {
   }, []);
 
   const refreshdata = async () => {
-    // if (Refresh) {
-      // setRefresh(false) 
-      console.log("dummy refreshing")
-      // router.refresh();
-    // }
-    // console.log("no refresh")
+    console.log("dummy refreshing")
   };
 
   const handleRoleChange = async (event, userId) => {
@@ -78,7 +73,7 @@ const ManageUser = ({ searchParams }) => {
       });
 
       const data = await response.json();
-      // console.log(data)
+
       if (data.status) {
         Notify({ message: data.result, status: data.status })
         console.log('Roles updated successfully', data);
@@ -107,34 +102,13 @@ const ManageUser = ({ searchParams }) => {
       {notPasskey && <CreateDialog />}
       <h1>Manage User</h1>
       <div>
-        {['admin', 'doctor', 'patient'].map((roleType, idx) => (
+        {['admin', 'doctor', 'patient'].map((roleType) => (
           <React.Fragment key={roleType}>
+            
             <h3 className={styles.tags} onClick={() => { toggleSection(roleType); refreshdata(); }}>
               {roleType.charAt(0).toUpperCase() + roleType.slice(1)}s
             </h3>
-            {/* <div className={`${styles.content} ${expandedSections[roleType] ? styles.expanded : ''}`}>
-              <div className={styles.UserDetailstop}>
-                <span># </span>
-                <h4>Name</h4>
-                <h4>Role</h4>
-              </div>
-              {expandedSections[roleType] && user?.[roleType]?.map((user, index) => (
-                <div className={styles.UserDetails} key={user._id}>
-                  <span>{index + 1}. </span>
-                  {user.name}
-                  <select
-                    name="role"
-                    id={`Role:${user._id}`}
-                    value={roles[user._id]}
-                    onChange={(e) => handleRoleChange(e, user._id)}
-                  >
-                    <option value="admin">Admin</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="patient">Patient</option>
-                  </select>
-                </div>
-              ))}
-            </div> */}
+
             <div className={`${styles.content} ${expandedSections[roleType] ? styles.expanded : ''}`}>
               <div className={styles.UserDetailstop}>
                 <span># </span>

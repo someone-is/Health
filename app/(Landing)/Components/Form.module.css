@@ -19,7 +19,9 @@
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
     border-radius: 4px;
 }
-
+.formsection .focusedWorng {
+    border: 1px solid red;
+}
 .form textarea {
     padding: 0.5rem;
     border: 1px solid rgba(var(--card-border-rgb), 0.15);

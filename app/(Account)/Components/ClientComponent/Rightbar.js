@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useOmnipresence } from '@/app/Context/Omnipresent'
 import ShinyRippleButton from '../Button/ShinyRipplebutton'
 import LottieAnimation from '../Button/EditSVG'
+import Loader from '@/app/Compenents/Loader/Loader'
 
 const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, city, pincode }) => {
     const search = useSearchParams()
@@ -12,11 +13,12 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
     const { user, setuser } = useOmnipresence();
     const [isEditing, setisEditing] = useState()
     const [closing, setclosing] = useState(false)
+    const [Loading, setLoading] = useState(false)
     console.log(isPath)
     const router = useRouter()
 
     const handleClick = () => {
-        if (isPath.Modifying || search.size === 1 ) {
+        if (isPath.Modifying || search.size === 1) {
             router.push("/Account/Profile")
         } else if (search.size === 0) {
             router.push("/Account/Profile?Modifying=true")
@@ -26,7 +28,7 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
     useEffect(() => {
         if (search.size === 1) {
             setisEditing(false)
-                setclosing(true)
+            setclosing(true)
             setuser({
                 name: name,
                 role: role,
@@ -52,6 +54,9 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
 
     const handleSubmit = async () => {
         console.log("Clicked")
+        setLoading(true)
+        console.log(Loading)
+
         try {
             if (role === 'admin') {
                 console.log("first is admin")
@@ -88,6 +93,7 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
         } catch (error) {
             console.log(error.message)
         }
+        setLoading(false)
     }
 
     return (
@@ -97,10 +103,8 @@ const Rightbar = ({ isPath, name, role, field, bio, gender, phoneNumber, state, 
                 <h4 className={styles.listsrighth4}>{isEditing ? 'Edit Profile' : "Cancel"}</h4>
             </div>
             {closing && <div className={`${styles.buttonOther} ${isEditing ? styles.closingbtn : ''}`} onClick={handleSubmit}>
-                <ShinyRippleButton children={"Save"} CustomDesign={styles.savebtn} onClick={handleSubmit} bgColourLeave="green" bgColourover='green' extraLeave={40} extraMove={110} />
-                {/* <h4 className={styles.listsrighth4}>Save</h4> */}
+                <ShinyRippleButton children={Loading ? <Loader /> : "Save"} CustomDesign={!Loading ? styles.savebtn : styles.savebtnloading} onClick={handleSubmit} bgColourLeave="green" bgColourover='green' extraLeave={40} extraMove={110} />
             </div>}
-
         </div>
     )
 }

@@ -14,9 +14,9 @@ const Account = async ({ searchParams }) => {
   const { user, Userdata } = await GetProfileData();
   // console.log( "this is cached data",  user, Userdata  )
   const isPath = searchParams
-  console.log(isPath)
+  // console.log(isPath)
   const isEditing = searchParams.Modifying === 'true'
-  console.log(isEditing)
+  // console.log(isEditing)
   // const { user, Userdata } = await CurrentUser()
 
   return (

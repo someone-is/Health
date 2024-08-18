@@ -10,7 +10,7 @@ export async function middleware(request) {
     const isApiRoute = request.nextUrl.pathname.startsWith("/Api")
     const isAdminApiRoute = request.nextUrl.pathname.startsWith("/Api/User/Admin/")
     const isAppointmentApiRoute = request.nextUrl.pathname.startsWith("/Api/Appointment")
-    console.log("middddddd",isAppointmentApiRoute)
+    // console.log("middddddd",isAppointmentApiRoute)
     const roleBasedRoutes = {
         "/Api/User/Admin": ["admin"],
         "/Api/User/Admin/Data": ["admin"],

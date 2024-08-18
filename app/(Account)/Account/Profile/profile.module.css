@@ -88,6 +88,15 @@
     cursor: pointer;
     background-color: rgb(69, 212, 69);
 }
+.savebtnloading{
+    padding: 6.7px 25.74px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: rgb(69, 212, 69);
+}
 @keyframes dropbtn {
     from{
         margin-left: -2rem;
