@@ -63,7 +63,7 @@
     /* background: linear-gradient(to right, rgba(255, 0, 0, 0.093), rgba(0, 0, 0, 0.148)); */
     backdrop-filter: blur(40px);
     padding: 1.5rem;
-    animation: popUp 3s forwards;
+    /* animation: popUp 3s forwards; */
 }
 
 @keyframes popUp {
