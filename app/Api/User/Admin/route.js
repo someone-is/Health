@@ -13,9 +13,6 @@ export async function GET(request) {
         const doctor = await User.find({ as: "doctor" }).select('-password');
         const admin = await User.find({ as: "admin" }).select('-password');
 
-        // const reval = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Api/Revalidate?secret=${process.env.REVALIDATE_SECRET}`);
-        // const response = await reval.json();
-        // console.log("Revalidation", response)
         return NextResponse.json({ user: { admin, doctor, patient }, success: true })
 
     } catch (error) {

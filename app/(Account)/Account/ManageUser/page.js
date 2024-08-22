@@ -18,7 +18,6 @@ const ManageUser = ({ searchParams }) => {
   const [ChosenRole, setChosenRole] = useState()
   const [_id, set_id] = useState()
   const [roles, setRoles] = useState({});
-  const [Refresh, setRefresh] = useState(true)
   const { Notify, correct } = useOmnipresence();
   const [expandedSections, setExpandedSections] = useState({
     admin: false,
@@ -31,7 +30,6 @@ const ManageUser = ({ searchParams }) => {
     const response = await fetch("/Api/User/Admin");
     const dataresponse = await fetch("/Api/User/Admin/Data");
     const { admindata } = await dataresponse.json();
-    console.log(admindata)
     const data = await response.json();
     setuserdata(admindata);
     setUser(data.user);
@@ -104,7 +102,7 @@ const ManageUser = ({ searchParams }) => {
       <div>
         {['admin', 'doctor', 'patient'].map((roleType) => (
           <React.Fragment key={roleType}>
-            
+
             <h3 className={styles.tags} onClick={() => { toggleSection(roleType); refreshdata(); }}>
               {roleType.charAt(0).toUpperCase() + roleType.slice(1)}s
             </h3>
