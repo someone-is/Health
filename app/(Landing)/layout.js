@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <OmniProvider>
-      <body className={inter.className}><Notification/>{children}</body>
+        <body className={inter.className}><Notification />{children}</body>
       </OmniProvider>
     </html>
   );

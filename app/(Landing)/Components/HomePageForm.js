@@ -139,7 +139,6 @@ const HomePageForm = () => {
           name="Gender"
           className={Unfilled.gender ? styles.focusedWorng : ''}
           id='Gender'
-          defaultValue={''}
           value={Appointment.gender}
           onFocus={() => handleFocus('gender')}
           onChange={(e) => setAppointment({ ...Appointment, gender: e.target.value })}
