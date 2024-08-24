@@ -1,12 +1,12 @@
 'use client'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './EditSection.module.css'
 import { useOmnipresence } from '@/app/Context/Omnipresent'
 const Centersection = ({ name, role, field, bio, gender, phoneNumber, state, city, pincode }) => {
   // const [user, setuser] = useState({ name: name, role: role, field: field, bio: bio, gender: gender, phoneNumber: phoneNumber, state: state, city: city, pincode: pincode })
   const { user, setuser } = useOmnipresence();
-  console.log(user)
+  // console.log(user)
   return (
     <div className={styles.dataSection}>
       <Image className={styles.background} src='/pexels-padrinan-255379.jpg' alt="Profile background" width={1920} height={1080} priority />
@@ -37,14 +37,14 @@ const Centersection = ({ name, role, field, bio, gender, phoneNumber, state, cit
       <div className={styles.subSections}>
         <label htmlFor='Gender'><h3>Gender</h3></label>
         <select
-                    name="Gender"
-                    id='Gender'
-                    defaultValue={gender}
-                    onChange={(e) => setuser({ ...user, gender: e.target.value })}
-                  >
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
+          name="Gender"
+          id='Gender'
+          defaultValue={gender}
+          onChange={(e) => setuser({ ...user, gender: e.target.value })}
+        >
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
         {/* <input id='Gender' onChange={(e) => setuser({ ...user, gender: e.target.value })} autoComplete="sex" defaultValue={gender} /> */}
       </div>
 
@@ -59,17 +59,17 @@ const Centersection = ({ name, role, field, bio, gender, phoneNumber, state, cit
         <div className={styles.address} >
           <div className={styles.smallerSections}>
             <label htmlFor='State'><h4>State</h4></label>
-            <input id='State' autoComplete='off' onChange={(e) => setuser({ ...user, address: {...user.address, state: e.target.value } })} defaultValue={state} />
+            <input id='State' autoComplete='off' onChange={(e) => setuser({ ...user, address: { ...user.address, state: e.target.value } })} defaultValue={state} />
           </div>
 
           <div className={styles.smallerSections}>
             <label htmlFor='City'><h4>City</h4></label>
-            <input id='City' autoComplete='off' onChange={(e) => setuser({ ...user, address: {...user.address, city: e.target.value } })} defaultValue={city} />
+            <input id='City' autoComplete='off' onChange={(e) => setuser({ ...user, address: { ...user.address, city: e.target.value } })} defaultValue={city} />
           </div>
 
           <div className={styles.smallerSections}>
             <label htmlFor='Pincode'><h4>Pincode</h4></label>
-            <input id='Pincode' autoComplete='off' onChange={(e) => setuser({ ...user, address: {...user.address, pincode: e.target.value } })} defaultValue={pincode} />
+            <input id='Pincode' autoComplete='off' onChange={(e) => setuser({ ...user, address: { ...user.address, pincode: e.target.value } })} defaultValue={pincode} />
           </div>
 
         </div>

@@ -1,23 +1,16 @@
-import React,{cache} from 'react'
+import React from 'react'
 import design from '../../account.module.css'
-// import CurrentUser from '@/app/ServersideFetching/CurrentUser'
 import styles from './profile.module.css'
 import Image from 'next/image'
 import CurrentUser from '@/app/DatabaseAndFetching/ServersideFetching/CurrentUser'
 import Centersection from '../../Components/ClientComponent/CentersectionEdit'
 import Rightbar from '../../Components/ClientComponent/Rightbar'
 
-const GetProfileData = cache(async()=>{const {user, Userdata} = await CurrentUser();
- return ({user,Userdata})})
-
 const Account = async ({ searchParams }) => {
-  const { user, Userdata } = await GetProfileData();
-  // console.log( "this is cached data",  user, Userdata  )
+  const { user, Userdata } = await CurrentUser();
   const isPath = searchParams
-  // console.log(isPath)
   const isEditing = searchParams.Modifying === 'true'
-  // console.log(isEditing)
-  // const { user, Userdata } = await CurrentUser()
+
 
   return (
     <div className={design.page}>
@@ -38,7 +31,7 @@ const Account = async ({ searchParams }) => {
             <p>{user?.name}</p>
           </div>
           {user.as === 'doctor' && <div className={styles.subSections}><h3>Field</h3><p>{Userdata?.field}</p></div>}
-          {user.as === 'doctor' && <div className={styles.subSections}><h3>About</h3><p style={{ whiteSpace: 'pre-wrap',textTransform: "none" }}>{Userdata?.bio}</p></div>}
+          {user.as === 'doctor' && <div className={styles.subSections}><h3>About</h3><p style={{ whiteSpace: 'pre-wrap', textTransform: "none" }}>{Userdata?.bio}</p></div>}
           {user.as !== 'patient' && <div className={styles.subSections}>
             <h3>Role</h3>
             <p>{user?.as}</p>
@@ -69,9 +62,9 @@ const Account = async ({ searchParams }) => {
             </div>
           </div>
         </div> :
-          <Centersection name={user?.name} role={user?.as} gender={Userdata?.gender} field={Userdata?.field} bio={Userdata?.bio} phoneNumber={Userdata?.phoneNumber} state={Userdata?.address?.state} city={Userdata?.address?.city} pincode={Userdata?.address?.pincode}/>}
-      
-        <Rightbar isPath={isPath} name={user?.name} role={user?.as} gender={Userdata?.gender} field={Userdata?.field} bio={Userdata?.bio} phoneNumber={Userdata?.phoneNumber} state={Userdata?.address?.state} city={Userdata?.address?.city} pincode={Userdata?.address?.pincode}/>
+          <Centersection name={user?.name} role={user?.as} gender={Userdata?.gender} field={Userdata?.field} bio={Userdata?.bio} phoneNumber={Userdata?.phoneNumber} state={Userdata?.address?.state} city={Userdata?.address?.city} pincode={Userdata?.address?.pincode} />}
+
+        <Rightbar isPath={isPath} name={user?.name} role={user?.as} gender={Userdata?.gender} field={Userdata?.field} bio={Userdata?.bio} phoneNumber={Userdata?.phoneNumber} state={Userdata?.address?.state} city={Userdata?.address?.city} pincode={Userdata?.address?.pincode} />
 
       </div>
     </div>
