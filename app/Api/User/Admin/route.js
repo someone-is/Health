@@ -3,9 +3,7 @@ import ConnectDatabase from '../../Connections/ConnectDatabase';
 import { NextResponse } from 'next/server';
 import { User } from '@/app/DatabaseAndFetching/Models/User';
 
-export async function GET(request) {
-    const path = request.nextUrl.searchParams
-    console.log(path)
+export async function GET() {
     ConnectDatabase();
     try {
 
