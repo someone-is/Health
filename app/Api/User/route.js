@@ -25,6 +25,11 @@ export async function POST(request) {
         await NewUser.save();
         createOrUpdateAdminData(NewUser)
 
+        // To revalidate data in the Manage User Page
+        const reval = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/Api/Revalidate?secret=${process.env.REVALIDATE_SECRET}`);
+        const response = await reval.json();
+        console.log("Revalidation",response)
+        
         return NextResponse.json({result:"User Created", NewUser, status: true})
     } catch (error) {
         console.log(error)
