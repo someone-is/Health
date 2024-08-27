@@ -9,7 +9,13 @@ const AppointmentsModel = new mongoose.Schema({
         type: String,
     },
     doctor: {
-        type: mongoose.ObjectId,
+        _id: {
+            type: mongoose.ObjectId,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
     },
     date_of_appointment: {
         type: Date,

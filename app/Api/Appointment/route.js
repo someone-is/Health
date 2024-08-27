@@ -17,7 +17,7 @@ export async function GET(request) {
         if (user.as === 'doctor') {
             console.log("Its Doctor")
             const userrr = await Doctordata.find({ userId: user._id }).select("_id")
-            const appointment_with_patient = await Appointments.find({ doctor: userrr[0]._id })
+            const appointment_with_patient = await Appointments.find({ 'doctor._id': userrr[0]._id })
             const appointment = await Appointments.find({ userId: user._id })
             return NextResponse.json({ appointment_with_patient, appointment, message: "Successfully received the Appointment", success: true })
         }
@@ -32,7 +32,7 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-    
+
     ConnectDatabase();
     const appointment = await request.json();
     try {

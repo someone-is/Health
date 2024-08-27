@@ -20,7 +20,10 @@ const Booking = ({ name, _id }) => {
     const [Appointment, setAppointment] = useState({
         name: '',
         userId: '',
-        doctor: _id,
+        doctor: {
+            _id: _id,
+            name: name
+          },
         date_of_appointment: new Date(),
         concern: '',
         comment: '',

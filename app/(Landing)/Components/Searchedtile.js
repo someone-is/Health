@@ -1,15 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
 import styles from './Form.module.css'
-function Searchedtile({ Searched, setIsFocused, setDoc, Appointment,setdoctorcover }) {
+function Searchedtile({ Searched, setIsFocused, setDoc, Appointment, setdoctorcover }) {
+
   const handleclick = () => {
-    console.log("first")
-    
-    setDoc({ ...Appointment, doctor: Searched._id })
+    setDoc({ ...Appointment, doctor: { ...Appointment.doctor, _id: Searched._id, name: Searched.name } })
     setdoctorcover(Searched.name)
     setIsFocused(false)
   }
-  // console.log(Appointment)
+
   return (
     <div className={styles.searchtile} onClick={handleclick}>
       <div className={styles.photosearch}>

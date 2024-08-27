@@ -1,0 +1,38 @@
+.modal {
+    position: fixed;
+    opacity: 0;
+    z-index: -1;
+    width: 18rem;
+    height: 13.75rem;
+    padding: 1.5rem 2rem;
+    transition: opacity 0.3s ease;
+    transition-delay: -1s;
+    background-color: rgb(0, 0, 0);
+    /* border: 5px solid rgb(243, 255, 72); */
+    border: 2px solid rgba(var(--card-border-rgb), 0.5);
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
+.modal.expanding {
+    opacity: 1;
+    padding: 2rem;
+    z-index: 1000;
+    font-size: smaller;
+}
+.modal.hidden {
+    overflow: hidden;
+    transition: font-size 0.3s ease-in;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    max-width: 500px;
+}
+
+.modal-content {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.expanding .modal-content {
+    opacity: 1;
+}

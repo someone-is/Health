@@ -19,7 +19,10 @@ const HomePageForm = () => {
   const [Appointment, setAppointment] = useState({
     name: '',
     userId: '',
-    doctor: '',
+    doctor: {
+      _id: '',
+      name: ''
+    },
     date_of_appointment: new Date(),
     concern: '',
     comment: '',
@@ -74,19 +77,23 @@ const HomePageForm = () => {
 
     if (data.success) {
       setAppointment({
-      name: '',
-      userId: '',
-      doctor: '',
-      date_of_appointment: new Date(),
-      concern: '',
-      comment: '',
-      gender: '',
-      phoneNumber: '',
-      address: {
-        state: '',
-        city: '',
-        pincode: ''
-      }})
+        name: '',
+        userId: '',
+        doctor: {
+          _id: '',
+          name: ''
+        },
+        date_of_appointment: new Date(),
+        concern: '',
+        comment: '',
+        gender: '',
+        phoneNumber: '',
+        address: {
+          state: '',
+          city: '',
+          pincode: ''
+        }
+      })
       setdoctorcover('')
     }
     console.log(data)
@@ -94,7 +101,7 @@ const HomePageForm = () => {
 
   const handleFocus = (field) => {
     setUnfilled({ ...Unfilled, [field]: false });
-};
+  };
 
   const handleDateChange = (date) => {
     setAppointment({ ...Appointment, date_of_appointment: date });
@@ -103,7 +110,7 @@ const HomePageForm = () => {
     <form className={styles.form} action="">
       <div className={styles.formsection}>
         <label htmlFor="Name">Name</label>
-        <input className={Unfilled.name ? styles.focusedWorng : ''} type="text" id="Name" placeholder="Name" autoComplete='off' onFocus={() => handleFocus('name')} onChange={(e) => setAppointment({ ...Appointment, name: e.target.value })} value={Appointment.name}/>
+        <input className={Unfilled.name ? styles.focusedWorng : ''} type="text" id="Name" placeholder="Name" autoComplete='off' onFocus={() => handleFocus('name')} onChange={(e) => setAppointment({ ...Appointment, name: e.target.value })} value={Appointment.name} />
       </div>
       <div className={styles.formsection}>
         <label htmlFor="userId">User-Id</label>
@@ -111,7 +118,7 @@ const HomePageForm = () => {
       </div>
       <div className={styles.formsection}>
         <label htmlFor="Doctor">Doctor</label>
-        <input className={Unfilled.doctor ? styles.focusedWorng : ''} type="text" id="Doctor" placeholder="Doctor" autoComplete='off' onFocus={() => {setIsFocused(true);handleFocus('doctor')} } onBlur={() => setTimeout(() => { setIsFocused(false) }, 400)} value={doctorcover} onChange={(e) => setdoctorcover(e.target.value)} />
+        <input className={Unfilled.doctor ? styles.focusedWorng : ''} type="text" id="Doctor" placeholder="Doctor" autoComplete='off' onFocus={() => { setIsFocused(true); handleFocus('doctor') }} onBlur={() => setTimeout(() => { setIsFocused(false) }, 400)} value={doctorcover} onChange={(e) => setdoctorcover(e.target.value)} />
 
         {isFocused && <Searched search={doctorcover} setDoc={setAppointment} setIsFocused={setIsFocused} Appointment={Appointment} setdoctorcover={setdoctorcover} />}
       </div>
@@ -126,11 +133,11 @@ const HomePageForm = () => {
       </div>
       <div className={`${styles.formsection} ${styles.Fullwidth}`}>
         <label htmlFor="Concern">Concern</label>
-        <input className={Unfilled.concern ? styles.focusedWorng : ''} type="text" id="Concern" placeholder="Concern" autoComplete='off' onFocus={() => handleFocus('concern')} onChange={(e) => setAppointment({ ...Appointment, concern: e.target.value })} value={Appointment.concern}/>
+        <input className={Unfilled.concern ? styles.focusedWorng : ''} type="text" id="Concern" placeholder="Concern" autoComplete='off' onFocus={() => handleFocus('concern')} onChange={(e) => setAppointment({ ...Appointment, concern: e.target.value })} value={Appointment.concern} />
       </div>
       <div className={`${styles.formsection} ${styles.Fullwidth}`}>
         <label htmlFor="Comment">Comment</label>
-        <textarea type="text" id="Comment" rows={5} style={{ resize: "vertical", whiteSpace: 'pre-wrap' }} placeholder="Comment" autoComplete='off' onChange={(e) => setAppointment({ ...Appointment, comment: e.target.value })} value={Appointment.comment}/>
+        <textarea type="text" id="Comment" rows={5} style={{ resize: "vertical", whiteSpace: 'pre-wrap' }} placeholder="Comment" autoComplete='off' onChange={(e) => setAppointment({ ...Appointment, comment: e.target.value })} value={Appointment.comment} />
       </div>
       <div className={styles.formsection}>
         <label htmlFor="Gender">Gender</label>
@@ -150,7 +157,7 @@ const HomePageForm = () => {
       </div>
       <div className={styles.formsection}>
         <label htmlFor="Phone Number">Phone Number</label>
-        <input className={Unfilled.phoneNumber ? styles.focusedWorng : ''} type="text" id="Phone Number" placeholder="Phone Number" autoComplete='off' onFocus={() => handleFocus('phoneNumber')} onChange={(e) => setAppointment({ ...Appointment, phoneNumber: e.target.value })} value={Appointment.phoneNumber}/>
+        <input className={Unfilled.phoneNumber ? styles.focusedWorng : ''} type="text" id="Phone Number" placeholder="Phone Number" autoComplete='off' onFocus={() => handleFocus('phoneNumber')} onChange={(e) => setAppointment({ ...Appointment, phoneNumber: e.target.value })} value={Appointment.phoneNumber} />
       </div>
       <div className={`${styles.formsection} ${styles.Fullwidth}`}>
         <p>Address</p>
