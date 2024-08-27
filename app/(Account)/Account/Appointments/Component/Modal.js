@@ -2,13 +2,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './modal.module.css';
 
-const MovieModal = ({ appointmentData, isOpen, onClose }) => {
+const MovieModal = ({ movie, isOpen, onClose }) => {
   const [modalStyle, setModalStyle] = useState({});
   const modalRef = useRef(null);
 
   useEffect(() => {
-    if (isOpen && appointmentData) {
-      const rect = appointmentData.rect;
+    if (isOpen && movie) {
+      const rect = movie.rect;
       // Initial style (starting position)
       setModalStyle({
         top: rect.top,
@@ -16,7 +16,7 @@ const MovieModal = ({ appointmentData, isOpen, onClose }) => {
         width: rect.width,
         height: rect.height,
         position: 'fixed',
-        transition: 'all 3s ease',
+        transition: 'all 0.3s ease',
       });
 
       // Delay to trigger the transition
@@ -30,22 +30,22 @@ const MovieModal = ({ appointmentData, isOpen, onClose }) => {
         }));
       }, 30);
     }
-  }, [isOpen, appointmentData]);
+  }, [isOpen, movie]);
 
   const handleClose = () => {
     // Reverse the animation before closing
     setModalStyle((prevStyle) => ({
       ...prevStyle,
-      top: appointmentData.rect.top,
-      left: appointmentData.rect.left,
-      width: appointmentData.rect.width,
-      height: appointmentData.rect.height,
+      top: movie.rect.top,
+      left: movie.rect.left,
+      width: movie.rect.width,
+      height: movie.rect.height,
     }));
 
     setTimeout(() => {
       onClose();
       setModalStyle({});
-    }, 3000);
+    }, 300);
   };
 
   return (
@@ -57,12 +57,12 @@ const MovieModal = ({ appointmentData, isOpen, onClose }) => {
       onClick={handleClose}
     >
       <div className={styles['modal-content']} onClick={(e) => e.stopPropagation()}>
-        {appointmentData && (
+        {movie && (
           <div>
-            <h2>{appointmentData?.name}</h2>
-            <p><strong>Concern:</strong> {appointmentData?.concern}</p>
-            <p><strong>Phone Number:</strong> {appointmentData?.phoneNumber}</p>
-            <p><strong>Date:</strong> {appointmentData?.date_of_appointment.toLocaleString('en-US', {
+            <h2>{movie?.name}</h2>
+            <p><strong>Concern:</strong> {movie?.concern}</p>
+            <p><strong>Phone Number:</strong> {movie?.phoneNumber}</p>
+            <p><strong>Date:</strong> {movie?.date_of_appointment.toLocaleString('en-US', {
               weekday: 'short',
               year: 'numeric',
               month: 'long',
@@ -71,9 +71,9 @@ const MovieModal = ({ appointmentData, isOpen, onClose }) => {
               minute: 'numeric',
               hour12: true,
             })}</p>
-            <p><strong>Comment:</strong> {appointmentData?.comment}</p>
-            <p><strong>Gender:</strong> {appointmentData?.gender}</p>
-            <p><strong>Address:</strong> {appointmentData?.address?.city}, {appointmentData?.address?.state}, {appointmentData?.address?.pincode}</p>
+            <p><strong>Comment:</strong> {movie?.comment}</p>
+            <p><strong>Gender:</strong> {movie?.gender}</p>
+            <p><strong>Address:</strong> {movie?.address?.city}, {movie?.address?.state}, {movie?.address?.pincode}</p>
             <button onClick={handleClose}>Close</button>
           </div>
         )}

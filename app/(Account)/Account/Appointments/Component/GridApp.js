@@ -21,9 +21,10 @@ const GridApp = ({ user, appointment, appointment_with_patient }) => {
     <div className={styles.grid}>
         
       {user?.as === 'doctor' && appointment_with_patient.map((appoint) => (
-        <div key={appoint._id} className={styles.letter} data-id={appoint._id}>
+        <div key={appoint._id} className={styles.letter} data-id={appoint._id} onClick={() => handleThumbnailClick(appoint)}>
           <h2>{appoint?.name}</h2>
           <p>{appoint?.concern}</p>
+          <p>{appoint?.phoneNumber}</p>
           <p>{appoint?.date_of_appointment.toLocaleString('en-US', {
             weekday: 'short',
             year: 'numeric',
@@ -31,24 +32,11 @@ const GridApp = ({ user, appointment, appointment_with_patient }) => {
             day: 'numeric',
             hour12: true,
           })}</p>
-          <p>{appoint?.phoneNumber}</p>
-          <div key={appoint._id} className={styles.letterhover} data-id={appoint._id} onClick={() => handleThumbnailClick(appoint)}>
-          <h2>{appoint?.name}</h2>
-            <p><strong>Concern:</strong> {appoint?.concern}</p>
-            <p><strong>Phone Number:</strong> {appoint?.phoneNumber}</p>
-            <p><strong>Date:</strong> {appoint?.date_of_appointment.toLocaleString('en-US', {
-              weekday: 'short',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: 'numeric',
-              minute: 'numeric',
-              hour12: true,
-            })}</p>
-            <p><strong>Comment:</strong> {appoint?.comment}</p>
-            <p><strong>Gender:</strong> {appoint?.gender}</p>
-            <p><strong>Address:</strong> {appoint?.address?.city}, {appoint?.address?.state}, {appoint?.address?.pincode}</p>
-        </div>
+          <p>{appoint?.comment}</p>
+          <p>{appoint?.gender}</p>
+          <p>{appoint?.address?.state}</p>
+          <p>{appoint?.address?.city}</p>
+          <p>{appoint?.address?.pincode}</p>
         </div>
       ))}
 
@@ -72,7 +60,7 @@ const GridApp = ({ user, appointment, appointment_with_patient }) => {
         </div>
       ))}
 
-      <MovieModal appoint={selectedAppointment} isOpen={isModalOpen} onClose={handleCloseModal} />
+      <MovieModal movie={selectedAppointment} isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   );
 };
