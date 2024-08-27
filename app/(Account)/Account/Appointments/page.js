@@ -17,7 +17,7 @@ const Appointments = async () => {
           <hr />
           <h1>My Appointments</h1>
         </div>
-      ) : <h1>My Appointments</h1>}
+      ) : <div className={styles.notnavigation}><h1>My Appointments</h1></div>}
       
       <GridApp user={user} appointment={appointment} appointment_with_patient={appointment_with_patient} />
     </div>

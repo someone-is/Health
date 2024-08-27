@@ -3,12 +3,12 @@
     opacity: 0;
     z-index: -1;
     width: 18rem;
-    height: 13.75rem;
+    height: 8.5rem;
+    /* height: 13.75rem; */
     padding: 1.5rem 2rem;
     transition: opacity 0.3s ease;
     transition-delay: -1s;
     background-color: rgb(0, 0, 0);
-    /* border: 5px solid rgb(243, 255, 72); */
     border: 2px solid rgba(var(--card-border-rgb), 0.5);
     overflow: hidden;
     border-radius: var(--border-radius);
@@ -20,12 +20,14 @@
     z-index: 1000;
     font-size: smaller;
 }
+
+.modal.hidden .topHeading {
+    background-color: aqua;
+}
+
 .modal.hidden {
     overflow: hidden;
-    transition: font-size 0.3s ease-in;
-    text-overflow: ellipsis;
-    white-space: wrap;
-    max-width: 500px;
+    /* transition: background 0.3s ease-in; */
 }
 
 .modal-content {
@@ -33,6 +35,93 @@
     transition: opacity 0.3s ease;
 }
 
+.modal-content-ex h2 {
+    font-size: xx-large;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 20rem;
+}
+
+.modal-content-ex p {
+    font-size: large;
+    margin-bottom: 0.7rem;
+}
+
+.modal-content-ex strong {
+    font-size: large;
+}
+.modal-content-sh h2 {
+    font-size: 24px;
+    /* margin-bottom: 1rem; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 20rem;
+}
+
+.modal-content-sh p {
+    font-size: 16px;
+    /* margin-bottom: 0.7rem; */
+}
+
+.modal-content-sh strong {
+    font-size: 16px;
+}
+
 .modal.expanding .modal-content {
     opacity: 1;
+}
+
+.topHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+    /* transition-delay: 2s; */
+}
+.topHeadingclose {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(-10rem);
+    margin-bottom: -4.1rem;
+    transition: all 0.3s;
+    /* transition-delay: 0.1s; */
+    
+}
+
+.topHeading h1,
+.topHeadingclose h1 {
+    font-size: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 33rem;
+    padding: 0 1rem;
+    background-color: rgb(70, 169, 255);
+}
+
+.back {
+    display: flex;
+    align-items: center;
+    padding: 4px 0 0 0;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    background-color: rgba(var(--callout-rgb), 0);
+    border: none;
+    border-radius: var(--border-radius);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.back:hover {
+    box-shadow: -1px -1px 300px 31px rgba(255, 0, 0, 1);
+}
+
+.back:active {
+    transform: scale(0.95);
 }

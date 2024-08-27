@@ -32,11 +32,6 @@ const GridApp = ({ user, appointment, appointment_with_patient }) => {
             day: 'numeric',
             hour12: true,
           })}</p>
-          <p>{appoint?.comment}</p>
-          <p>{appoint?.gender}</p>
-          <p>{appoint?.address?.state}</p>
-          <p>{appoint?.address?.city}</p>
-          <p>{appoint?.address?.pincode}</p>
         </div>
       ))}
 
@@ -52,15 +47,10 @@ const GridApp = ({ user, appointment, appointment_with_patient }) => {
             day: 'numeric',
             hour12: true,
           })}</p>
-          <p>{appoint?.comment}</p>
-          <p>{appoint?.gender}</p>
-          <p>{appoint?.address?.state}</p>
-          <p>{appoint?.address?.city}</p>
-          <p>{appoint?.address?.pincode}</p>
         </div>
       ))}
 
-      <MovieModal movie={selectedAppointment} isOpen={isModalOpen} onClose={handleCloseModal} />
+      <MovieModal appdata={selectedAppointment} isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   );
 };
