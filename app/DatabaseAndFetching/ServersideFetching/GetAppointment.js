@@ -16,7 +16,8 @@ export default async function GetAppointment() {
         if (user.as === 'admin') {
             console.log("Its Admin")
             const appointment = await Appointments.find().sort({ updatedAt: -1 })
-            return { appointment, message: "Successfully received the Appointment", success: true }
+            const myappointment = await Appointments.find({ userId: user._id }).sort({ updatedAt: -1 })
+            return { appointment, myappointment, message: "Successfully received the Appointment", success: true }
         }
         if (user.as === 'doctor') {
             console.log("Its Doctor")

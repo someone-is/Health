@@ -1,0 +1,5 @@
+<!-- Save this as paint-stripe.svg in your public folder -->
+<svg width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="50" fill="#4e9ddc" />
+  <path d="M10,10 Q50,30 100,10 T200,10" fill="none" stroke="#8fceea" stroke-width="10" />
+</svg>

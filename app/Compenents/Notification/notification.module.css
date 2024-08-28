@@ -8,6 +8,7 @@
     max-width: 23rem;
     border: 1px solid rgba(var(--card-border-rgb), 0.5);
     background: rgba(var(--card-rgb), 0.3);
+    backdrop-filter: blur(40px);
     padding: 0.5rem 0.7rem;
     border-radius: 0.2rem;
     left: 0;

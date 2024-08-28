@@ -1,10 +1,12 @@
 .modal {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     opacity: 0;
     z-index: -1;
     width: 18rem;
     height: 8.5rem;
-    /* height: 13.75rem; */
     padding: 1.5rem 2rem;
     transition: opacity 0.3s ease;
     transition-delay: -1s;
@@ -17,7 +19,7 @@
 .modal.expanding {
     opacity: 1;
     padding: 2rem;
-    z-index: 1000;
+    z-index: 13;
     font-size: smaller;
 }
 
@@ -27,12 +29,39 @@
 
 .modal.hidden {
     overflow: hidden;
-    /* transition: background 0.3s ease-in; */
 }
 
 .modal-content {
     opacity: 1;
+    overflow-y: scroll;
+    /* background-color: rgb(125, 194, 255); */
+    height: 55vh;
     transition: opacity 0.3s ease;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+.modal-content::-webkit-scrollbar-thumb {
+    visibility: hidden;
+    border-radius: 3px;
+    background: #88888889;
+}
+
+/* Handle on hover */
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #858585;
+}
+
+.modal-content:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
 }
 
 .modal-content-ex h2 {
@@ -52,9 +81,9 @@
 .modal-content-ex strong {
     font-size: large;
 }
+
 .modal-content-sh h2 {
     font-size: 24px;
-    /* margin-bottom: 1rem; */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -63,7 +92,6 @@
 
 .modal-content-sh p {
     font-size: 16px;
-    /* margin-bottom: 0.7rem; */
 }
 
 .modal-content-sh strong {
@@ -80,8 +108,8 @@
     justify-content: space-between;
     margin-bottom: 2rem;
     transition: all 0.3s;
-    /* transition-delay: 2s; */
 }
+
 .topHeadingclose {
     display: flex;
     align-items: center;
@@ -89,8 +117,6 @@
     transform: translateY(-10rem);
     margin-bottom: -4.1rem;
     transition: all 0.3s;
-    /* transition-delay: 0.1s; */
-    
 }
 
 .topHeading h1,
@@ -101,7 +127,13 @@
     white-space: nowrap;
     max-width: 33rem;
     padding: 0 1rem;
-    background-color: rgb(70, 169, 255);
+    /* background-color: rgb(70, 169, 255); */
+    background-image: url('/paint-texture.svg');
+    background-size: 110%;
+    border-radius: 0.7rem;
+    background-repeat: no-repeat;
+    background-position: start;
+    background-position-x: right;
 }
 
 .back {
@@ -124,4 +156,88 @@
 
 .back:active {
     transform: scale(0.95);
+}
+
+.deletebtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(var(--callout-rgb), 0);
+    border-radius: var(--border-radius);
+    transition: all 0.5s;
+    cursor: pointer;
+    border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.chititle {
+    font-size: larger;
+    font-weight: bold;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.1rem 1rem 0.1rem 0.6rem;
+    justify-content: center;
+}
+
+.deletebtn:hover {
+    border: 1px solid rgba(255, 255, 255, 0.064);
+    box-shadow: -1px -1px 300px 31px rgba(255, 0, 0, 1);
+}
+
+.deletebtn:active {
+    transform: scale(0.95);
+}
+
+.deletebtn p {
+    color: red;
+    transition: color 0.3s ease;
+}
+
+.deletebtn:hover p {
+    color: white;
+}
+
+.icondel {
+    width: 1.3rem;
+    filter: invert(27%) sepia(96%) saturate(7473%) hue-rotate(356deg) brightness(102%) contrast(109%);
+}
+
+.deletebtn:hover .icondel {
+    filter: invert(100%) brightness(1000%);
+}
+
+.confirmbtn {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.5s;
+    padding: 0.8rem 1.1rem;
+    color: rgb(67, 249, 67);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(67, 249, 67, 0.5);
+    background-color: rgba(var(--callout-rgb), 0);
+}
+
+.confirmbtn:hover {
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.064);
+    box-shadow: -1px -1px 300px 31px rgba(67, 249, 67, 0.579);
+}
+
+.confirmbtn:active {
+    transform: scale(0.95);
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    bottom: 0;
+    padding: 1rem;
+    margin-bottom: 0;
+    border-radius: var(--border-radius);
+    /* background-color: rgba(127, 255, 212, 0.121); */
 }

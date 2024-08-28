@@ -12,7 +12,8 @@ export async function GET(request) {
         if (user.as === 'admin') {
             console.log("Its Admin")
             const appointment = await Appointments.find()
-            return NextResponse.json({ appointment, message: "Successfully received the Appointment", success: true })
+            const myappointment = await Appointments.find({ userId: user._id })
+            return NextResponse.json({ myappointment, appointment, message: "Successfully received the Appointment", success: true })
         }
         if (user.as === 'doctor') {
             console.log("Its Doctor")
@@ -43,5 +44,27 @@ export async function POST(request) {
 
     } catch (error) {
         return NextResponse.json({ result: error.message, message: "Faild to book an Appointment", success: false })
+    }
+}
+export async function DELETE(request) {
+    const token = request.cookies.get("Login Token")?.value
+    const requested_appointment = await request.json();
+    const user = await Cookiechecker(token)
+    ConnectDatabase();
+    try {
+        const appointment = await Appointments.findById(requested_appointment)
+        if (appointment.userId === user._id) {
+            const deletedOne = await Appointments.deleteOne({ _id: requested_appointment })
+            if (deletedOne.deletedCount === 0) {
+                new Error(code = undefined)
+            } else {
+                return NextResponse.json({ message: "Your Appointment has been Successfully Deleted", success: true })
+            }
+        } else {
+            return NextResponse.json({ message: "You can't delete this Appointment as it doesn't belongs to you", success: false })
+        }
+
+    } catch (error) {
+        return NextResponse.json({ result: error.message, message: "Faild to Delete this Appointment", success: false })
     }
 }

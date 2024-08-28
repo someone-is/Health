@@ -6,22 +6,27 @@ import MovieModal from './Modal';
 const GridApp = ({ user, appointment, appointment_with_patient }) => {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [visibehind, setvisibehind] = useState(false);
 
   const handleThumbnailClick = (appoint) => {
+    setvisibehind(true)
+    console.log(visibehind)
     const rect = document.querySelector(`[data-id="${appoint._id}"]`).getBoundingClientRect();
     setSelectedAppointment({ ...appoint, rect });
     setIsModalOpen(true);
   };
-
+  
   const handleCloseModal = () => {
+    setvisibehind(false)
+    console.log(visibehind)
     setIsModalOpen(false);
   };
 
   return (
     <div className={styles.grid}>
-        
+
       {user?.as === 'doctor' && appointment_with_patient.map((appoint) => (
-        <div key={appoint._id} className={styles.letter} data-id={appoint._id} onClick={() => handleThumbnailClick(appoint)}>
+        <div key={appoint._id} className={`${styles.letter} ${(selectedAppointment?._id === appoint._id && visibehind) ? styles.visibility : ""}`} data-id={appoint._id} onClick={() => handleThumbnailClick(appoint)}>
           <h2>{appoint?.name}</h2>
           <p>{appoint?.concern}</p>
           <p>{appoint?.phoneNumber}</p>
@@ -36,7 +41,7 @@ const GridApp = ({ user, appointment, appointment_with_patient }) => {
       ))}
 
       {appointment.map((appoint) => (
-        <div key={appoint._id} className={styles.letter} data-id={appoint._id} onClick={() => handleThumbnailClick(appoint)}>
+        <div key={appoint._id} className={`${styles.letter} ${(selectedAppointment?._id === appoint._id && visibehind) ? styles.visibility : ""}`} data-id={appoint._id} onClick={() => handleThumbnailClick(appoint)}>
           <h2>{appoint?.name}</h2>
           <p>{appoint?.concern}</p>
           <p>{appoint?.phoneNumber}</p>

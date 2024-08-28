@@ -58,6 +58,12 @@
     border-radius: var(--border-radius);
     padding: 1.5rem 2rem;
     cursor: pointer;
+    /* transition: opacity 0.1s ease; */
+}
+.letter.visibility{
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 .grid {
     display: grid;
