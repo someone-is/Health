@@ -41,3 +41,5 @@ app/(Account)/Components/Button/Component.module.css
 app/(Account)/Components/Button/Shinybutton.js
 app/DatabaseAndFetching/Models/SyncData.js
 app/DatabaseAndFetching/Models/SyncDoctor.js
+app/Compenents/Loader/ProgressBar.js
+app/Compenents/Loader/ProgressBar.module.css
