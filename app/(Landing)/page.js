@@ -11,7 +11,8 @@ import GetDoctors from "../DatabaseAndFetching/ServersideFetching/GetDoctors";
 
 export default async function Home() {
 
-  const { user } = await CurrentUser();
+  const { user, Userdata } = await CurrentUser();
+  console.log(user, Userdata)
   const { doctors } = await GetDoctors();
   // console.log(doctors, user)
   return (
@@ -102,25 +103,25 @@ export default async function Home() {
       <main className={styles.FormSection}>
         <div className={styles.book}>BOOK YOUR APPOINTMENT NOW!!</div>
         <Image className={styles.Appoin} src="/undraw_medicine_b-1-ol.svg" alt="Appointment Background" width={500} height={400} priority />
-        <h4 className={styles.details}>Unlock Convenient Appointment Booking By Logging In</h4>
-        <HomePageForm />
+        {user ? <h4 className={styles.details}>Easy Appointment Booking For {user?.name}</h4> : <h4 className={styles.details}>Unlock Convenient Appointment Booking By Logging In</h4>}
+        <HomePageForm user={user} Userdata={Userdata} />
       </main>
       <div className={styles.docSection}>
         <h1>Our Leading Healthcare Professionals</h1>
         <div className={styles.docGrid}>
-          {doctors?.map((doc)=>
-          (<Link href={`/${doc._id}`} className={styles.docBox} key = {doc._id}>
-            <Image className={styles.docProhome} src={doc.gender==="Male" ? "/Male.svg":"/Female.svg"} alt="Appointment Background" width={200} height={200} priority />
+          {doctors?.map((doc) =>
+          (<Link href={`/${doc._id}`} className={styles.docBox} key={doc._id}>
+            <Image className={styles.docProhome} src={doc.gender === "Male" ? "/Male.svg" : "/Female.svg"} alt="Appointment Background" width={200} height={200} priority />
             <div className={styles.docBoxDetails}>
-            <h3>{doc.name}</h3>
-            <p>{doc.field}</p>
+              <h3>{doc.name}</h3>
+              <p>{doc.field}</p>
             </div>
             <div className={styles.docBoxDetailsExpand}>
-            <h3><span className={styles.expTitle}>Name:</span> {doc.name}</h3>
-            <p><span className={styles.expTitle}>Field:</span> {doc.field}</p>
-            <p className={styles.DocAbout}><span className={styles.expTitle} >About:</span> {doc.bio}</p>
+              <h3><span className={styles.expTitle}>Name:</span> {doc.name}</h3>
+              <p><span className={styles.expTitle}>Field:</span> {doc.field}</p>
+              <p className={styles.DocAbout}><span className={styles.expTitle} >About:</span> {doc.bio}</p>
             </div>
-          
+
           </Link>))}
         </div>
         <Image className={styles.docBAck} src="/undraw_empty_street_re_atjq.svg" alt="Appointment Background" width={1080} height={400} priority />

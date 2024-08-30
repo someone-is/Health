@@ -70,8 +70,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 20rem;
+    max-width: 50rem;
 }
+/* .modal.expanding .modal-content-ex h2 {
+    font-size: xx-large;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100rem;
+    background-color: antiquewhite;
+} */
 
 .modal-content-ex p {
     font-size: large;

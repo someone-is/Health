@@ -58,8 +58,16 @@
     border-radius: var(--border-radius);
     padding: 1.5rem 2rem;
     cursor: pointer;
+    
     /* transition: opacity 0.1s ease; */
 }
+.letter h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 20rem;
+}
+
 .letter.visibility{
     opacity: 0;
     pointer-events: none;

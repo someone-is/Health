@@ -106,6 +106,12 @@
     font-family: var(--font-mono);
 }
 
+.sections label span{
+    color: rgba(255, 0, 0, 0.616);
+    font-size: smaller;
+    margin-left: -6px;
+    margin-bottom: 7px;
+}
 .full {
     grid-column: span 2;
 }

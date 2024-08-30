@@ -6,7 +6,8 @@ import ShinyRippleButton from '@/app/(Account)/Components/Button/ShinyRipplebutt
 import { useRouter } from 'next/navigation'
 import { useOmnipresence } from '@/app/Context/Omnipresent'
 import Image from 'next/image'
-const Booking = ({ name, _id }) => {
+const Booking = ({ name, _id, user }) => {
+
     const router = useRouter();
     const [Closing, setClosing] = useState(false)
     const [ClosingCross, setClosingCross] = useState(false)
@@ -16,14 +17,15 @@ const Booking = ({ name, _id }) => {
         gender: false,
         phoneNumber: false
     });
+    // console.log(user)
     const { Notify } = useOmnipresence();
-    const [Appointment, setAppointment] = useState({
+    const [Appointment, setAppointment] = useState(user === null ? {
         name: '',
         userId: '',
         doctor: {
             _id: _id,
             name: name
-          },
+        },
         date_of_appointment: new Date(),
         concern: '',
         comment: '',
@@ -33,6 +35,23 @@ const Booking = ({ name, _id }) => {
             state: '',
             city: '',
             pincode: ''
+        }
+    } : {
+        name: user?.name,
+        userId: user?.userId,
+        doctor: {
+            _id: _id,
+            name: name
+        },
+        date_of_appointment: new Date(),
+        concern: '',
+        comment: '',
+        gender: user?.gender || '',
+        phoneNumber: user?.phoneNumber || '',
+        address: {
+            state: user?.address?.state || '',
+            city: user?.address?.city || '',
+            pincode: user?.address?.pincode || ''
         }
     });
 
@@ -80,7 +99,7 @@ const Booking = ({ name, _id }) => {
     const handleFocus = (field) => {
         setUnfilled({ ...Unfilled, [field]: false });
     };
-    const close = ()=>{
+    const close = () => {
         setClosingCross(true)
         setTimeout(() => {
             router.back();
@@ -100,20 +119,20 @@ const Booking = ({ name, _id }) => {
                 </div>
                 <form>
                     <div className={styles.sections}>
-                        <label htmlFor='Name'>Name</label>
-                        <input className={Unfilled.name ? styles.focusedWorng : ''} type="text" id='Name' placeholder='Name' onFocus={() => handleFocus('name')} onChange={(e) => setAppointment({ ...Appointment, name: e.target.value })} />
+                        <label htmlFor='Name'>Name <span>*</span></label>
+                        <input className={Unfilled.name ? styles.focusedWorng : ''} type="text" id='Name' placeholder='Name' onFocus={() => handleFocus('name')} onChange={(e) => setAppointment({ ...Appointment, name: e.target.value })} defaultValue={user?.name} />
                     </div>
                     <div className={styles.sections}>
                         <label htmlFor='userId'>User-Id</label>
-                        <input type="text" id='userId' placeholder='User-Id' onChange={(e) => setAppointment({ ...Appointment, userId: e.target.value })} />
+                        <input type="text" id='userId' placeholder='User-Id' onChange={(e) => setAppointment({ ...Appointment, userId: e.target.value })} defaultValue={user?.userId} />
                     </div>
                     <div className={styles.sections}>
-                        <label htmlFor='Gender'>Gender</label>
+                        <label htmlFor='Gender'>Gender <span>*</span></label>
                         <select
                             className={Unfilled.gender ? styles.focusedWorng : ''}
                             name="Gender"
                             id='Gender'
-                            defaultValue={''}
+                            defaultValue={user?.gender}
                             onFocus={() => handleFocus('gender')}
                             onChange={(e) => setAppointment({ ...Appointment, gender: e.target.value })}
                         >
@@ -123,7 +142,7 @@ const Booking = ({ name, _id }) => {
                         </select>
                     </div>
                     <div className={styles.sections}>
-                        <label htmlFor="Date">Date</label>
+                        <label htmlFor="Date">Date <span>*</span></label>
                         <DatePicker
                             id='Date'
                             selectedDate={Appointment.date_of_appointment}
@@ -131,7 +150,7 @@ const Booking = ({ name, _id }) => {
                         />
                     </div>
                     <div className={`${styles.sections} ${styles.full}`}>
-                        <label htmlFor='Concern'>Concern</label>
+                        <label htmlFor='Concern'>Concern <span>*</span></label>
                         <input className={Unfilled.concern ? styles.focusedWorng : ''} type="text" id='Concern' placeholder='Concern' onFocus={() => handleFocus('concern')} onChange={(e) => setAppointment({ ...Appointment, concern: e.target.value })} />
                     </div>
                     <div className={`${styles.sections} ${styles.full}`}>
@@ -139,20 +158,20 @@ const Booking = ({ name, _id }) => {
                         <input type="text" id='Comment' placeholder='Comment' onChange={(e) => setAppointment({ ...Appointment, comment: e.target.value })} />
                     </div>
                     <div className={styles.sections}>
-                        <label htmlFor='Phone Number'>Phone Number</label>
-                        <input className={Unfilled.phoneNumber ? styles.focusedWorng : ''} type="text" id='Phone Number' placeholder='Phone Number' onFocus={() => handleFocus('phoneNumber')} onChange={(e) => setAppointment({ ...Appointment, phoneNumber: e.target.value })} />
+                        <label htmlFor='Phone Number'>Phone Number <span>*</span></label>
+                        <input className={Unfilled.phoneNumber ? styles.focusedWorng : ''} type="text" id='Phone Number' placeholder='Phone Number' onFocus={() => handleFocus('phoneNumber')} onChange={(e) => setAppointment({ ...Appointment, phoneNumber: e.target.value })} defaultValue={user?.phoneNumber} />
                     </div>
                     <div className={styles.sections}>
                         <label htmlFor='State'>State</label>
-                        <input type="text" id='State' placeholder='State' onChange={(e) => setAppointment({ ...Appointment, address: { ...Appointment.address, state: e.target.value } })} />
+                        <input type="text" id='State' placeholder='State' onChange={(e) => setAppointment({ ...Appointment, address: { ...Appointment.address, state: e.target.value } })} defaultValue={user?.address?.state} />
                     </div>
                     <div className={styles.sections}>
                         <label htmlFor='City'>City</label>
-                        <input type="text" id='City' placeholder='City' onChange={(e) => setAppointment({ ...Appointment, address: { ...Appointment.address, city: e.target.value } })} />
+                        <input type="text" id='City' placeholder='City' onChange={(e) => setAppointment({ ...Appointment, address: { ...Appointment.address, city: e.target.value } })} defaultValue={user?.address?.city} />
                     </div>
                     <div className={styles.sections}>
                         <label htmlFor='Pin-code'>Pin-code</label>
-                        <input type="text" id='Pin-code' placeholder='Pin-code' onChange={(e) => setAppointment({ ...Appointment, address: { ...Appointment.address, pincode: e.target.value } })} />
+                        <input type="text" id='Pin-code' placeholder='Pin-code' onChange={(e) => setAppointment({ ...Appointment, address: { ...Appointment.address, pincode: e.target.value } })} defaultValue={user?.address?.pincode} />
                     </div>
                     <ShinyRippleButton children={"Book"} CustomDesign={styles.subbtn} typeC='button' onClick={handleSubmit} extraLeave={200} extraMove={700} />
                 </form>

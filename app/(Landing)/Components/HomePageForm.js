@@ -5,7 +5,9 @@ import Searched from './Searched'
 import DatePicker from './DatePicker'
 import ShinyRippleButton from '@/app/(Account)/Components/Button/ShinyRipplebutton'
 import { useOmnipresence } from '@/app/Context/Omnipresent'
-const HomePageForm = () => {
+
+const HomePageForm = ({ user, Userdata }) => {
+
   const { Notify } = useOmnipresence();
   const [isFocused, setIsFocused] = useState(false);
   const [doctorcover, setdoctorcover] = useState('')
@@ -16,7 +18,7 @@ const HomePageForm = () => {
     gender: false,
     phoneNumber: false
   });
-  const [Appointment, setAppointment] = useState({
+  const [Appointment, setAppointment] = useState(user === null ? {
     name: '',
     userId: '',
     doctor: {
@@ -33,6 +35,23 @@ const HomePageForm = () => {
       city: '',
       pincode: ''
     }
+  } : {
+    name: user.name,
+    userId: user.userId,
+    doctor: {
+      _id: '',
+      name: ''
+    },
+    date_of_appointment: new Date(),
+    concern: '',
+    comment: '',
+    gender: Userdata?.gender || '',
+    phoneNumber: Userdata?.phoneNumber || '',
+    address: {
+      state: Userdata?.address?.state || '',
+      city: Userdata?.address?.city || '',
+      pincode: Userdata?.address?.pincode || ''
+    }
   });
 
   const handleSubmit = async (e) => {
@@ -48,7 +67,7 @@ const HomePageForm = () => {
     } else {
       updatedUnfilled.name = false;
     }
-    if (Appointment.doctor === '') {
+    if (Appointment.doctor._id === '') {
       console.log("doctor is empty");
       updatedUnfilled.doctor = true;
     } else {
@@ -77,8 +96,8 @@ const HomePageForm = () => {
 
     if (data.success) {
       setAppointment({
-        name: '',
-        userId: '',
+        name: user.name,
+        userId: user.userId,
         doctor: {
           _id: '',
           name: ''
@@ -86,12 +105,12 @@ const HomePageForm = () => {
         date_of_appointment: new Date(),
         concern: '',
         comment: '',
-        gender: '',
-        phoneNumber: '',
+        gender: Userdata?.gender || '',
+        phoneNumber: Userdata?.phoneNumber || '',
         address: {
-          state: '',
-          city: '',
-          pincode: ''
+          state: Userdata?.address?.state || '',
+          city: Userdata?.address?.city || '',
+          pincode: Userdata?.address?.pincode || ''
         }
       })
       setdoctorcover('')
@@ -100,6 +119,7 @@ const HomePageForm = () => {
   }
 
   const handleFocus = (field) => {
+
     setUnfilled({ ...Unfilled, [field]: false });
   };
 
@@ -109,21 +129,21 @@ const HomePageForm = () => {
   return (
     <form className={styles.form} action="">
       <div className={styles.formsection}>
-        <label htmlFor="Name">Name</label>
+        <label htmlFor="Name">Name <span>*</span></label>
         <input className={Unfilled.name ? styles.focusedWorng : ''} type="text" id="Name" placeholder="Name" autoComplete='off' onFocus={() => handleFocus('name')} onChange={(e) => setAppointment({ ...Appointment, name: e.target.value })} value={Appointment.name} />
       </div>
       <div className={styles.formsection}>
         <label htmlFor="userId">User-Id</label>
-        <input type="text" id="userId" placeholder="User-Id" autoComplete='off' onChange={(e) => setAppointment({ ...Appointment, userId: e.target.value })} />
+        <input type="text" id="userId" placeholder="User-Id" autoComplete='off' onChange={(e) => setAppointment({ ...Appointment, userId: e.target.value })} value={Appointment.userId} />
       </div>
       <div className={styles.formsection}>
-        <label htmlFor="Doctor">Doctor</label>
+        <label htmlFor="Doctor">Doctor <span>*</span></label>
         <input className={Unfilled.doctor ? styles.focusedWorng : ''} type="text" id="Doctor" placeholder="Doctor" autoComplete='off' onFocus={() => { setIsFocused(true); handleFocus('doctor') }} onBlur={() => setTimeout(() => { setIsFocused(false) }, 400)} value={doctorcover} onChange={(e) => setdoctorcover(e.target.value)} />
 
         {isFocused && <Searched search={doctorcover} setDoc={setAppointment} setIsFocused={setIsFocused} Appointment={Appointment} setdoctorcover={setdoctorcover} />}
       </div>
       <div className={styles.formsection}>
-        <label htmlFor="Date">Date</label>
+        <label htmlFor="Date">Date <span>*</span></label>
 
         <DatePicker
           id='Date'
@@ -132,7 +152,7 @@ const HomePageForm = () => {
         />
       </div>
       <div className={`${styles.formsection} ${styles.Fullwidth}`}>
-        <label htmlFor="Concern">Concern</label>
+        <label htmlFor="Concern">Concern <span>*</span></label>
         <input className={Unfilled.concern ? styles.focusedWorng : ''} type="text" id="Concern" placeholder="Concern" autoComplete='off' onFocus={() => handleFocus('concern')} onChange={(e) => setAppointment({ ...Appointment, concern: e.target.value })} value={Appointment.concern} />
       </div>
       <div className={`${styles.formsection} ${styles.Fullwidth}`}>
@@ -140,7 +160,7 @@ const HomePageForm = () => {
         <textarea type="text" id="Comment" rows={5} style={{ resize: "vertical", whiteSpace: 'pre-wrap' }} placeholder="Comment" autoComplete='off' onChange={(e) => setAppointment({ ...Appointment, comment: e.target.value })} value={Appointment.comment} />
       </div>
       <div className={styles.formsection}>
-        <label htmlFor="Gender">Gender</label>
+        <label htmlFor="Gender">Gender <span>*</span></label>
 
         <select
           name="Gender"
@@ -156,7 +176,7 @@ const HomePageForm = () => {
         </select>
       </div>
       <div className={styles.formsection}>
-        <label htmlFor="Phone Number">Phone Number</label>
+        <label htmlFor="Phone Number">Phone Number <span>*</span></label>
         <input className={Unfilled.phoneNumber ? styles.focusedWorng : ''} type="text" id="Phone Number" placeholder="Phone Number" autoComplete='off' onFocus={() => handleFocus('phoneNumber')} onChange={(e) => setAppointment({ ...Appointment, phoneNumber: e.target.value })} value={Appointment.phoneNumber} />
       </div>
       <div className={`${styles.formsection} ${styles.Fullwidth}`}>
